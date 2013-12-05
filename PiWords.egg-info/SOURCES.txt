@@ -1,0 +1,12 @@
+MANIFEST.in
+setup.py
+PI_Words/__init__.py
+PI_Words/main.py
+PI_Words/PI/__init__.py
+PI_Words/PI/simple.py
+PI_Words/test/__init__.py
+PI_Words/test/test_ps1.py
+PiWords.egg-info/PKG-INFO
+PiWords.egg-info/SOURCES.txt
+PiWords.egg-info/dependency_links.txt
+PiWords.egg-info/top_level.txt
