@@ -14,6 +14,17 @@ class PyTest(TestCommand):
         errno = pytest.main(self.test_args)
         sys.exit(errno)
 
+class Tox(TestCommand):
+    def finalize_options(self):
+        TestCommand.finalize_options(self)
+        self.test_args = []
+        self.test_suite = True
+    def run_tests(self):
+        #import here, cause outside the eggs aren't loaded
+        import tox
+        errcode = tox.cmdline(self.test_args)
+        sys.exit(errcode)
+
 setup(
         name='PiWords',
         version='0.1',
@@ -25,8 +36,10 @@ setup(
         # test_suite="PI_Words.test",
         # test_suite="pytest",
         # test_require="pytest",
-        tests_require=['pytest'],
-        cmdclass = {'test': PyTest},
+        tests_require=['tox'],
+        cmdclass = {'test': Tox},
+        # tests_require=['pytest'],
+        # cmdclass = {'test': PyTest},
         )
 
 # http://peak.telecommunity.com/DevCenter/setuptools#test
