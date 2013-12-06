@@ -1,5 +1,6 @@
 MANIFEST.in
 setup.py
+tox.ini
 PI_Words/__init__.py
 PI_Words/main.py
 PI_Words/PI/__init__.py

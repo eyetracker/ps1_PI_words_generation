@@ -4,9 +4,9 @@ cmdargs=['D:\\Python33\\python.exe', local('E:\\Python\\6005_Computer_Engineerin
 env=None
 running sdist
 running egg_info
+writing dependency_links to PiWords.egg-info\dependency_links.txt
 writing top-level names to PiWords.egg-info\top_level.txt
 writing PiWords.egg-info\PKG-INFO
-writing dependency_links to PiWords.egg-info\dependency_links.txt
 reading manifest file 'PiWords.egg-info\SOURCES.txt'
 reading manifest template 'MANIFEST.in'
 warning: no files found matching '*.py' under directory '*.txt'
@@ -26,6 +26,7 @@ creating PiWords-0.1\PiWords.egg-info
 making hard links in PiWords-0.1...
 hard linking MANIFEST.in -> PiWords-0.1
 hard linking setup.py -> PiWords-0.1
+hard linking tox.ini -> PiWords-0.1
 hard linking PI_Words\__init__.py -> PiWords-0.1\PI_Words
 hard linking PI_Words\main.py -> PiWords-0.1\PI_Words
 hard linking PI_Words\PI\__init__.py -> PiWords-0.1\PI_Words\PI
@@ -42,6 +43,7 @@ adding 'PiWords-0.1\MANIFEST.in'
 adding 'PiWords-0.1\PKG-INFO'
 adding 'PiWords-0.1\setup.cfg'
 adding 'PiWords-0.1\setup.py'
+adding 'PiWords-0.1\tox.ini'
 adding 'PiWords-0.1\PiWords.egg-info\dependency_links.txt'
 adding 'PiWords-0.1\PiWords.egg-info\PKG-INFO'
 adding 'PiWords-0.1\PiWords.egg-info\SOURCES.txt'

@@ -4,3 +4,4 @@
 # include CONTRIBUTORS.txt
 # include LICENSE
 recursive-include *.txt *.py
+include tox.ini
