@@ -5,8 +5,8 @@ env=None
 running sdist
 running egg_info
 writing dependency_links to PiWords.egg-info\dependency_links.txt
-writing top-level names to PiWords.egg-info\top_level.txt
 writing PiWords.egg-info\PKG-INFO
+writing top-level names to PiWords.egg-info\top_level.txt
 reading manifest file 'PiWords.egg-info\SOURCES.txt'
 reading manifest template 'MANIFEST.in'
 warning: no files found matching '*.py' under directory '*.txt'
