@@ -1,6 +1,6 @@
 1. Pi Generation
 ================
 
-Bailey-Borwein-Plouffe formula
+Using the Bailey-Borwein-Plouffe formula to generate an arbitrary number of pi's digits.
 
 
