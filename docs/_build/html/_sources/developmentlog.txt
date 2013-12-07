@@ -1,0 +1,6 @@
+1. Pi Generation
+================
+
+Bailey-Borwein-Plouffe formula
+
+

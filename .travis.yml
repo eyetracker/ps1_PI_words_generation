@@ -9,4 +9,5 @@ install:
 script:
     - "tox"
     # - "python setup.py test"
-      
+    
+# http://borntyping.co.uk/posts/tox-and-travis-ci.html    

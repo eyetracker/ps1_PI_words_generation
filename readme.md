@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.org/eyetracker/ps1_PI_words_generation.png?branch=master)](https://travis-ci.org/eyetracker/ps1_PI_words_generation)
-
 ### PI Words
+
+[![Build Status](https://travis-ci.org/eyetracker/ps1_PI_words_generation.png?branch=master)](https://travis-ci.org/eyetracker/ps1_PI_words_generation)
 
 My first project for learning test driven development using NEW tools for me:
 
