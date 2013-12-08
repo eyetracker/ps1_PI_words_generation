@@ -4,8 +4,8 @@ cmdargs=['D:\\Python33\\python.exe', local('E:\\Python\\6005_Computer_Engineerin
 env=None
 running sdist
 running egg_info
-writing dependency_links to PiWords.egg-info\dependency_links.txt
 writing PiWords.egg-info\PKG-INFO
+writing dependency_links to PiWords.egg-info\dependency_links.txt
 writing top-level names to PiWords.egg-info\top_level.txt
 reading manifest file 'PiWords.egg-info\SOURCES.txt'
 reading manifest template 'MANIFEST.in'
@@ -29,6 +29,8 @@ hard linking setup.py -> PiWords-0.1
 hard linking tox.ini -> PiWords-0.1
 hard linking PI_Words\__init__.py -> PiWords-0.1\PI_Words
 hard linking PI_Words\main.py -> PiWords-0.1\PI_Words
+hard linking PI_Words\PI\PiGenerator.py -> PiWords-0.1\PI_Words\PI
+hard linking PI_Words\PI\PiGeneratorTest.py -> PiWords-0.1\PI_Words\PI
 hard linking PI_Words\PI\__init__.py -> PiWords-0.1\PI_Words\PI
 hard linking PI_Words\PI\simple.py -> PiWords-0.1\PI_Words\PI
 hard linking PI_Words\test\__init__.py -> PiWords-0.1\PI_Words\test
@@ -50,6 +52,8 @@ adding 'PiWords-0.1\PiWords.egg-info\SOURCES.txt'
 adding 'PiWords-0.1\PiWords.egg-info\top_level.txt'
 adding 'PiWords-0.1\PI_Words\main.py'
 adding 'PiWords-0.1\PI_Words\__init__.py'
+adding 'PiWords-0.1\PI_Words\PI\PiGenerator.py'
+adding 'PiWords-0.1\PI_Words\PI\PiGeneratorTest.py'
 adding 'PiWords-0.1\PI_Words\PI\simple.py'
 adding 'PiWords-0.1\PI_Words\PI\__init__.py'
 adding 'PiWords-0.1\PI_Words\test\test_ps1.py'
