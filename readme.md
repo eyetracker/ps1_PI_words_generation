@@ -15,4 +15,3 @@ This is my personal solution to a deliberately unnamed computer engineering cour
 
 http://pi-words.rtfd.org
 
-ö"
