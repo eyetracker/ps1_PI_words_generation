@@ -48,7 +48,38 @@
             
   <div class="section" id="pi-generation">
 <h1>1. Pi Generation<a class="headerlink" href="#pi-generation" title="Permalink to this headline">¶</a></h1>
-<p>Using the Bailey-Borwein-Plouffe formula to generate an arbitrary number of pi&#8217;s digits.</p>
+<p>Using the Bailey-Borwein-Plouffe formula to generate an arbitrary number of
+pi&#8217;s digits.</p>
+<ol class="arabic simple">
+<li>Carefully look at the specification of the method you are looking to
+implement.</li>
+<li>Write a battery of tests to test the method you are about to write,
+checking all of the edge conditions for the specification.</li>
+<li>Write the actual method we specified.</li>
+</ol>
+<div class="section" id="the-assert-statement">
+<h2>The &#8216;assert&#8217; statement<a class="headerlink" href="#the-assert-statement" title="Permalink to this headline">¶</a></h2>
+<p>Python testing is limited by one <strong>assertion</strong> per function! This means, that
+the function fails on the first assert failure. This is because <cite>assert</cite>
+returns <cite>-1</cite> from the failed test function.  It can be concluded, that
+assertion statements <strong>need</strong> to be grouped in very similar statements!</p>
+</div>
+<div class="section" id="about-specifications">
+<h2>About specifications<a class="headerlink" href="#about-specifications" title="Permalink to this headline">¶</a></h2>
+<p>Main specification belongs under the function, but the role of specifications
+hints inbetween the test cases remains unresolved for now. It seems useful to
+have some more information about a tests background, but the work gets doubled
+by that. I link between the test cases and the full specification would be
+useful.</p>
+<p>New:
+Chained OR operators:</p>
+<blockquote>
+<div>if a | b | m &lt; 0:</div></blockquote>
+<dl class="docutils">
+<dt>Relearned:</dt>
+<dd>The power operator: <strong>**</strong></dd>
+</dl>
+</div>
 </div>
 
 
@@ -57,6 +88,15 @@
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">1. Pi Generation</a><ul>
+<li><a class="reference internal" href="#the-assert-statement">The &#8216;assert&#8217; statement</a></li>
+<li><a class="reference internal" href="#about-specifications">About specifications</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
   <p class="topless"><a href="description.html"
                         title="previous chapter">Pi Words</a></p>

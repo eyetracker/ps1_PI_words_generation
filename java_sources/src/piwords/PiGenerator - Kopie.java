@@ -1,5 +1,6 @@
+package piwords;
+
 public class PiGenerator {
-    /* package piwords; */
     /**
      * Returns precision hexadecimal digits of the fractional part of pi.
      * Returns digits in most significant to least significant order.
@@ -34,64 +35,42 @@ public class PiGenerator {
     /* http://www.compileonline.com/compile_java_online.php */
 
     public static void main(String []args){
-        System.out.println();
+        System.out.println(piDigit(0));
+        System.out.println(piDigit(1));
+        System.out.println(piDigit(2));
+        System.out.println(piDigit(3));
+        System.out.println(piDigit(4));
+        System.out.println(piDigit(5));
+        System.out.println(piDigit(6));
+        System.out.println(piDigit(7));
+        System.out.println(piDigit(8));
+        System.out.println(piDigit(9));
+        System.out.println(piDigit(10));
+        System.out.println(piDigit(11));
+        System.out.println(piDigit(12));
+        System.out.println(piDigit(13));
+        System.out.println(piDigit(14));
+        System.out.println(piDigit(15));
+        System.out.println(piDigit(16));
 
-        System.out.print(piDigit(0));
-        /* System.out.printf("%n NEW DIGIT %n"); */
-        System.out.print(" ");
-        System.out.print(piDigit(1));
-        /* System.out.printf("%n NEW DIGIT %n"); */
-        System.out.print(" ");
-        System.out.print(piDigit(2));
-        System.out.print(" ");
-        System.out.print(piDigit(3));
-        System.out.print(" ");
-        System.out.print(piDigit(4));
-        System.out.print(" ");
-        System.out.print(piDigit(5));
-        System.out.print(" ");
-        System.out.print(piDigit(6));
-        System.out.print(" ");
-        System.out.print(piDigit(7));
-        System.out.print(" ");
-        System.out.print(piDigit(8));
-        System.out.print(" ");
-        System.out.print(piDigit(9));
-        System.out.print(" ");
-        System.out.print(piDigit(10));
-        System.out.print(" ");
-        System.out.print(piDigit(11));
-        System.out.print(" ");
-        System.out.print(piDigit(12));
-        System.out.print(" ");
-        System.out.print(piDigit(13));
-        System.out.print(" ");
-        System.out.print(piDigit(14));
-        System.out.print(" ");
-        System.out.print(piDigit(15));
-        System.out.print(" ");
-        System.out.print(piDigit(16));
-
-        System.out.println();
-    }
-
+     }
     public static double powerMod(int a, int b, int m) {
         /*''' Computes a^b mod m
 
-          If a < 0, b < 0, or m < 0, return -1.
+        If a < 0, b < 0, or m < 0, return -1.
 
-          @param a
-          @param b
-          @param m
-          @return a^b mod m
-    TODO: Implement (Problem 1.b)'''*/
+        @param a
+        @param b
+        @param m
+        @return a^b mod m
+        TODO: Implement (Problem 1.b)'''*/
+
         double carryover;
         double power;
 
         if (a < 0 | b < 0| m < 0) return -1;
         power = Math.pow(a, b);
         carryover = power % m;
-        /* System.out.printf("== return powerMod: %f ==%n", carryover); */
         return carryover;
     }
 
@@ -105,16 +84,15 @@ public class PiGenerator {
      */
     public static int piDigit(int n) {
         if (n < 0) return -1;
-
+        
         n -= 1;
         double x = 4 * piTerm(1, n) - 2 * piTerm(4, n) -
-            piTerm(5, n) - piTerm(6, n);
+                   piTerm(5, n) - piTerm(6, n);
         x = x - Math.floor(x);
-        int result = (int)(x * 16); 
-        /* System.out.printf("-- return piDigit: %d --%n", result); */
-        return result;
+        
+        return (int)(x * 16);
     }
-
+    
     private static double piTerm(int j, int n) {
         // Calculate the left sum
         double s = 0;
@@ -123,7 +101,7 @@ public class PiGenerator {
             s += powerMod(16, n-k, r) / (double) r;
             s = s - Math.floor(s);
         }
-
+        
         // Calculate the right sum
         double t = 0;
         int k = n+1;
@@ -138,8 +116,7 @@ public class PiGenerator {
             }
             ++k;
         }
-        double result = s+t;
-        /* System.out.printf("++ return piTerm: %f ++%n", result); */
-        return result;
+        
+        return s+t;
     }
 }

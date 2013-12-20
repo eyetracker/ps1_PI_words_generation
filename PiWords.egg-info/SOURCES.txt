@@ -4,10 +4,9 @@ tox.ini
 PI_Words/__init__.py
 PI_Words/main.py
 PI_Words/PI/PiGenerator.py
-PI_Words/PI/PiGeneratorTest.py
 PI_Words/PI/__init__.py
 PI_Words/PI/simple.py
-PI_Words/test/__init__.py
+PI_Words/test/test_PiGeneratorTest.py
 PI_Words/test/test_ps1.py
 PiWords.egg-info/PKG-INFO
 PiWords.egg-info/SOURCES.txt

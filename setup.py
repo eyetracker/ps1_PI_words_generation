@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 from setuptools import setup
 from setuptools import find_packages
 from setuptools.command.test import test as TestCommand
