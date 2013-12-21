@@ -26,8 +26,12 @@ class PiGenerator:
     @staticmethod
     def computePiInHex(precision):
         # TODO: Implement (Problem 1.d)
-        return [0]
-
+        if precision <= 0:
+            return []
+        PiInHex = []
+        for i in range(precision):
+            PiInHex.append(PiGenerator.piDigit(i))
+        return PiInHex
 
     # decorator for python 2! unbound method removed from python 3!
     @staticmethod

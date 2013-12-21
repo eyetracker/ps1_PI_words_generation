@@ -43,7 +43,7 @@ def test_powerModMaxIntRanges():
 
     # TODO: Write more tests (Problem 1.a, 1.c)
 
-def test_piDigt():
+def test_piDigit():
     assert PiGenerator.piDigit(0) == 3
     assert PiGenerator.piDigit(1) == 2
     assert PiGenerator.piDigit(2) == 4
@@ -62,4 +62,9 @@ def test_piDigt():
     assert PiGenerator.piDigit(15) == 13
     assert PiGenerator.piDigit(16) == 3
 
+def test_computePiInHex():
+    assert PiGenerator.computePiInHex(0) == []
+    assert PiGenerator.computePiInHex(1) == [3]
+    assert len(PiGenerator.computePiInHex(16)) == 16
+    assert PiGenerator.computePiInHex(16) == [3,2,4,3,15,6,10,8,8,8,5,10,3,0,8,13]
 
