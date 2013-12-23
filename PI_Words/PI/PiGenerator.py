@@ -40,19 +40,33 @@ class PiGenerator:
 
         If a < 0, b < 0, or m < 0, return -1.
 
-        @param a
-        @param b
-        @param m
         @return a^b mod m
         TODO: Implement (Problem 1.b)'''
 
         if a | b | m < 0:
             return -1
-        power = math.floor(a**b)
-        carryover = power % m
-        debug("== return powerMod: {0} ==".format(carryover));
-        return carryover
+        # power = math.floor(a**b)
+        # carryover = power % m
+        # carryover = power % m
+        result = pow(a,b,m)
+        debug("== return powerMod: {0} ==".format(result));
+        return result
 
+    @staticmethod
+    def alternate_powerMod(x, y, z):
+        '''Calculate (x ** y) % z efficiently.
+
+        http://stackoverflow.com/questions/5246856/
+
+        is 1 second slower for pi_precision = 1000 (8.4 seconds total)
+        '''
+        number = 1
+        while y:
+            if y & 1:
+                number = number * x % z
+            y >>= 1
+            x = x * x % z
+        return number
 
     @staticmethod
     def piDigit(n):
