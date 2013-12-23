@@ -1,0 +1,1185 @@
+JAVA PROFILE 1.0.1, created Mon Dec 23 14:53:57 2013
+
+Copyright (c) 2003, 2005, Oracle and/or its affiliates. All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions
+are met:
+
+  - Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+
+  - Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in the
+    documentation and/or other materials provided with the distribution.
+
+  - Neither the name of Oracle nor the names of its
+    contributors may be used to endorse or promote products derived
+    from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+
+Header for -agentlib:hprof (or -Xrunhprof) ASCII Output (JDK 5.0 JVMTI based)
+
+WARNING!  This file format is under development, and is subject to
+change without notice.
+
+This file contains the following types of records:
+
+THREAD START
+THREAD END      mark the lifetime of Java threads
+
+TRACE           represents a Java stack trace.  Each trace consists
+                of a series of stack frames.  Other records refer to
+                TRACEs to identify (1) where object allocations have
+                taken place, (2) the frames in which GC roots were
+                found, and (3) frequently executed methods.
+
+HEAP DUMP       is a complete snapshot of all live objects in the Java
+                heap.  Following distinctions are made:
+
+                ROOT    root set as determined by GC
+                CLS     classes 
+                OBJ     instances
+                ARR     arrays
+
+SITES           is a sorted list of allocation sites.  This identifies
+                the most heavily allocated object types, and the TRACE
+                at which those allocations occurred.
+
+CPU SAMPLES     is a statistical profile of program execution.  The VM
+                periodically samples all running threads, and assigns
+                a quantum to active TRACEs in those threads.  Entries
+                in this record are TRACEs ranked by the percentage of
+                total quanta they consumed; top-ranked TRACEs are
+                typically hot spots in the program.
+
+CPU TIME        is a profile of program execution obtained by measuring
+                the time spent in individual methods (excluding the time
+                spent in callees), as well as by counting the number of
+                times each method is called. Entries in this record are
+                TRACEs ranked by the percentage of total CPU time. The
+                "count" field indicates the number of times each TRACE 
+                is invoked.
+
+MONITOR TIME    is a profile of monitor contention obtained by measuring
+                the time spent by a thread waiting to enter a monitor.
+                Entries in this record are TRACEs ranked by the percentage
+                of total monitor contention time and a brief description
+                of the monitor.  The "count" field indicates the number of 
+                times the monitor was contended at that TRACE.
+
+MONITOR DUMP    is a complete snapshot of all the monitors and threads in 
+                the System.
+
+HEAP DUMP, SITES, CPU SAMPLES|TIME and MONITOR DUMP|TIME records are generated 
+at program exit.  They can also be obtained during program execution by typing 
+Ctrl-\ (on Solaris) or by typing Ctrl-Break (on Win32).
+
+--------
+
+THREAD START (obj=50000170, id = 200002, name="HPROF gc_finish watcher", group="system")
+THREAD START (obj=50000170, id = 200001, name="main", group="main")
+THREAD START (obj=50000170, id = 200006, name="SIGINT handler", group="system")
+THREAD END (id = 200006)
+TRACE 301615:
+	java.math.BigInteger.montReduce(BigInteger.java:Unknown line)
+	java.math.BigInteger.oddModPow(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+TRACE 301481:
+	java.math.BigInteger.oddModPow(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+	piwords.PiGenerator.piTerm(PiGenerator.java:Unknown line)
+TRACE 301611:
+	java.math.BigInteger.squareToLen(BigInteger.java:Unknown line)
+	java.math.BigInteger.oddModPow(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+TRACE 301453:
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+	piwords.PiGenerator.piTerm(PiGenerator.java:Unknown line)
+	piwords.PiGenerator.piDigit(PiGenerator.java:Unknown line)
+TRACE 301501:
+	java.math.BigInteger.modPow2(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+	piwords.PiGenerator.piTerm(PiGenerator.java:Unknown line)
+TRACE 301493:
+	java.math.BigInteger.mod2(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow2(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+TRACE 301612:
+	java.math.BigInteger.mulAdd(BigInteger.java:Unknown line)
+	java.math.BigInteger.montReduce(BigInteger.java:Unknown line)
+	java.math.BigInteger.oddModPow(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+TRACE 301503:
+	java.math.BigInteger.modInverse(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+	piwords.PiGenerator.piTerm(PiGenerator.java:Unknown line)
+TRACE 301551:
+	java.math.MutableBigInteger.modInverse(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.mutableModInverse(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.modInverse(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+TRACE 301613:
+	java.math.BigInteger.addOne(BigInteger.java:Unknown line)
+	java.math.BigInteger.montReduce(BigInteger.java:Unknown line)
+	java.math.BigInteger.oddModPow(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+TRACE 301614:
+	java.math.BigInteger.intArrayCmpToLen(BigInteger.java:Unknown line)
+	java.math.BigInteger.montReduce(BigInteger.java:Unknown line)
+	java.math.BigInteger.oddModPow(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+TRACE 301457:
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+	piwords.PiGenerator.piTerm(PiGenerator.java:Unknown line)
+	piwords.PiGenerator.piDigit(PiGenerator.java:Unknown line)
+	piwords.PiGenerator.computePiInHex(PiGenerator.java:Unknown line)
+TRACE 301499:
+	java.math.BigInteger.testBit(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow2(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+TRACE 301606:
+	java.math.MutableBigInteger.divide(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.oddModPow(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+TRACE 301451:
+	java.math.BigInteger.valueOf(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+	piwords.PiGenerator.piTerm(PiGenerator.java:Unknown line)
+	piwords.PiGenerator.piDigit(PiGenerator.java:Unknown line)
+TRACE 301505:
+	java.math.BigInteger.multiply(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+	piwords.PiGenerator.piTerm(PiGenerator.java:Unknown line)
+TRACE 301610:
+	java.math.BigInteger.primitiveLeftShift(BigInteger.java:Unknown line)
+	java.math.BigInteger.squareToLen(BigInteger.java:Unknown line)
+	java.math.BigInteger.oddModPow(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+TRACE 301476:
+	java.math.BigInteger.remainder(BigInteger.java:Unknown line)
+	java.math.BigInteger.mod(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+TRACE 301609:
+	java.math.BigInteger.addOne(BigInteger.java:Unknown line)
+	java.math.BigInteger.squareToLen(BigInteger.java:Unknown line)
+	java.math.BigInteger.oddModPow(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+TRACE 301492:
+	java.math.BigInteger.bitLength(BigInteger.java:Unknown line)
+	java.math.BigInteger.mod2(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow2(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+TRACE 301573:
+	java.math.BigInteger.<init>(BigInteger.java:Unknown line)
+	java.math.BigInteger.valueOf(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+	piwords.PiGenerator.piTerm(PiGenerator.java:Unknown line)
+TRACE 301608:
+	java.math.BigInteger.mulAdd(BigInteger.java:Unknown line)
+	java.math.BigInteger.squareToLen(BigInteger.java:Unknown line)
+	java.math.BigInteger.oddModPow(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+TRACE 301550:
+	java.math.MutableBigInteger.fixup(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.modInverse(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.mutableModInverse(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.modInverse(BigInteger.java:Unknown line)
+TRACE 301604:
+	java.math.MutableBigInteger.divideOneWord(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.divide(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.oddModPow(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+TRACE 301597:
+	java.math.BigInteger.leftShift(BigInteger.java:Unknown line)
+	java.math.BigInteger.oddModPow(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+TRACE 301561:
+	java.math.BigInteger.remainder(BigInteger.java:Unknown line)
+	java.math.BigInteger.mod(BigInteger.java:Unknown line)
+	java.math.BigInteger.modInverse(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+TRACE 301452:
+	java.math.BigInteger.equals(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+	piwords.PiGenerator.piTerm(PiGenerator.java:Unknown line)
+TRACE 301474:
+	java.math.MutableBigInteger.divide(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.remainder(BigInteger.java:Unknown line)
+	java.math.BigInteger.mod(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+TRACE 301498:
+	java.math.BigInteger.getInt(BigInteger.java:Unknown line)
+	java.math.BigInteger.testBit(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow2(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+TRACE 301462:
+	java.math.BigInteger.compareTo(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+	piwords.PiGenerator.piTerm(PiGenerator.java:Unknown line)
+TRACE 301525:
+	java.math.MutableBigInteger.<init>(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.modInverse(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.mutableModInverse(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.modInverse(BigInteger.java:Unknown line)
+TRACE 301619:
+	java.math.BigInteger.<init>(BigInteger.java:Unknown line)
+	java.math.BigInteger.oddModPow(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+TRACE 301524:
+	java.util.Arrays.copyOfRange(Arrays.java:Unknown line)
+	java.math.MutableBigInteger.<init>(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.modInverse(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.mutableModInverse(MutableBigInteger.java:Unknown line)
+TRACE 301519:
+	java.util.Arrays.copyOf(Arrays.java:Unknown line)
+	java.math.MutableBigInteger.<init>(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.modInverse(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+TRACE 301559:
+	java.math.MutableBigInteger.divide(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.remainder(BigInteger.java:Unknown line)
+	java.math.BigInteger.mod(BigInteger.java:Unknown line)
+	java.math.BigInteger.modInverse(BigInteger.java:Unknown line)
+TRACE 301552:
+	java.math.MutableBigInteger.mutableModInverse(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.modInverse(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+TRACE 301383:
+	piwords.PiGenerator.piTerm(PiGenerator.java:Unknown line)
+	piwords.PiGenerator.piDigit(PiGenerator.java:Unknown line)
+	piwords.PiGenerator.computePiInHex(PiGenerator.java:Unknown line)
+	piwords.Main.main(Main.java:Unknown line)
+TRACE 301520:
+	java.math.MutableBigInteger.<init>(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.modInverse(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+TRACE 301565:
+	java.util.Arrays.copyOfRange(Arrays.java:Unknown line)
+	java.math.BigInteger.trustedStripLeadingZeroInts(BigInteger.java:Unknown line)
+	java.math.BigInteger.multiply(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+TRACE 301574:
+	java.math.BigInteger.square(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow2(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+TRACE 301591:
+	java.math.BigInteger.bitLengthForInt(BigInteger.java:Unknown line)
+	java.math.BigInteger.bitLength(BigInteger.java:Unknown line)
+	java.math.BigInteger.oddModPow(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+TRACE 301458:
+	java.lang.StrictMath.floorOrCeil(StrictMath.java:Unknown line)
+	java.lang.StrictMath.floor(StrictMath.java:Unknown line)
+	java.lang.Math.floor(Math.java:Unknown line)
+	piwords.PiGenerator.piTerm(PiGenerator.java:Unknown line)
+TRACE 301618:
+	java.math.BigInteger.stripLeadingZeroInts(BigInteger.java:Unknown line)
+	java.math.BigInteger.<init>(BigInteger.java:Unknown line)
+	java.math.BigInteger.oddModPow(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+TRACE 301479:
+	java.math.BigInteger.testBit(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+	piwords.PiGenerator.piTerm(PiGenerator.java:Unknown line)
+TRACE 301617:
+	java.util.Arrays.copyOfRange(Arrays.java:Unknown line)
+	java.math.BigInteger.stripLeadingZeroInts(BigInteger.java:Unknown line)
+	java.math.BigInteger.<init>(BigInteger.java:Unknown line)
+	java.math.BigInteger.oddModPow(BigInteger.java:Unknown line)
+TRACE 301456:
+	java.math.BigInteger.intValue(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+	piwords.PiGenerator.piTerm(PiGenerator.java:Unknown line)
+	piwords.PiGenerator.piDigit(PiGenerator.java:Unknown line)
+TRACE 301510:
+	java.math.BigInteger.<init>(BigInteger.java:Unknown line)
+	java.math.MutableBigInteger.toBigInteger(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.remainder(BigInteger.java:Unknown line)
+	java.math.BigInteger.mod(BigInteger.java:Unknown line)
+TRACE 301459:
+	java.lang.StrictMath.floor(StrictMath.java:Unknown line)
+	java.lang.Math.floor(Math.java:Unknown line)
+	piwords.PiGenerator.piTerm(PiGenerator.java:Unknown line)
+	piwords.PiGenerator.piDigit(PiGenerator.java:Unknown line)
+TRACE 301502:
+	java.math.BigInteger.equals(BigInteger.java:Unknown line)
+	java.math.BigInteger.modInverse(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+TRACE 301595:
+	java.math.BigInteger.bitLengthForInt(BigInteger.java:Unknown line)
+	java.math.BigInteger.leftShift(BigInteger.java:Unknown line)
+	java.math.BigInteger.oddModPow(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+TRACE 301475:
+	java.math.MutableBigInteger.toBigInteger(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.remainder(BigInteger.java:Unknown line)
+	java.math.BigInteger.mod(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+TRACE 301556:
+	java.math.MutableBigInteger.toBigInteger(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.modInverse(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+TRACE 301394:
+	java.lang.Math.getExponent(Math.java:Unknown line)
+	java.lang.StrictMath.floorOrCeil(StrictMath.java:Unknown line)
+	java.lang.StrictMath.floor(StrictMath.java:Unknown line)
+	java.lang.Math.floor(Math.java:Unknown line)
+TRACE 301592:
+	java.math.BigInteger.bitLength(BigInteger.java:Unknown line)
+	java.math.BigInteger.oddModPow(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+TRACE 301568:
+	java.math.BigInteger.<init>(BigInteger.java:Unknown line)
+	java.math.BigInteger.multiply(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+TRACE 301460:
+	java.lang.Math.floor(Math.java:Unknown line)
+	piwords.PiGenerator.piTerm(PiGenerator.java:Unknown line)
+	piwords.PiGenerator.piDigit(PiGenerator.java:Unknown line)
+	piwords.PiGenerator.computePiInHex(PiGenerator.java:Unknown line)
+TRACE 301537:
+	java.math.MutableBigInteger.rightShift(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.modInverse(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.mutableModInverse(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.modInverse(BigInteger.java:Unknown line)
+TRACE 301599:
+	java.math.MutableBigInteger.<init>(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.oddModPow(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+TRACE 301620:
+	java.math.BigInteger.multiplyToLen(BigInteger.java:Unknown line)
+	java.math.BigInteger.oddModPow(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+TRACE 301566:
+	java.math.BigInteger.trustedStripLeadingZeroInts(BigInteger.java:Unknown line)
+	java.math.BigInteger.multiply(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+TRACE 301517:
+	java.math.BigInteger.<init>(BigInteger.java:Unknown line)
+	java.math.BigInteger.mod2(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow2(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+TRACE 301572:
+	java.lang.Number.<init>(Number.java:Unknown line)
+	java.math.BigInteger.<init>(BigInteger.java:Unknown line)
+	java.math.BigInteger.valueOf(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+TRACE 301523:
+	java.lang.Math.min(Math.java:Unknown line)
+	java.util.Arrays.copyOfRange(Arrays.java:Unknown line)
+	java.math.MutableBigInteger.<init>(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.modInverse(MutableBigInteger.java:Unknown line)
+TRACE 301484:
+	java.math.BigInteger.getLowestSetBit(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+	piwords.PiGenerator.piTerm(PiGenerator.java:Unknown line)
+TRACE 301560:
+	java.math.MutableBigInteger.toBigInteger(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.remainder(BigInteger.java:Unknown line)
+	java.math.BigInteger.mod(BigInteger.java:Unknown line)
+	java.math.BigInteger.modInverse(BigInteger.java:Unknown line)
+TRACE 301522:
+	java.math.MutableBigInteger.isOdd(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.mutableModInverse(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.modInverse(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+TRACE 301548:
+	java.math.MutableBigInteger.rightShift(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.fixup(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.modInverse(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.mutableModInverse(MutableBigInteger.java:Unknown line)
+TRACE 301461:
+	java.math.BigInteger.compareMagnitude(BigInteger.java:Unknown line)
+	java.math.BigInteger.compareTo(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+TRACE 301500:
+	java.math.BigInteger.multiply(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow2(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+TRACE 301514:
+	java.lang.Math.min(Math.java:Unknown line)
+	java.util.Arrays.copyOfRange(Arrays.java:Unknown line)
+	java.math.BigInteger.stripLeadingZeroInts(BigInteger.java:Unknown line)
+	java.math.BigInteger.<init>(BigInteger.java:Unknown line)
+TRACE 300755:
+	java.io.FileInputStream.read(FileInputStream.java:Unknown line)
+	sun.misc.Resource.getBytes(Resource.java:Unknown line)
+	java.net.URLClassLoader.defineClass(URLClassLoader.java:Unknown line)
+	java.net.URLClassLoader.access$100(URLClassLoader.java:Unknown line)
+TRACE 301555:
+	java.math.BigInteger.<init>(BigInteger.java:Unknown line)
+	java.math.MutableBigInteger.toBigInteger(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.modInverse(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+TRACE 301518:
+	java.lang.Math.min(Math.java:Unknown line)
+	java.util.Arrays.copyOf(Arrays.java:Unknown line)
+	java.math.MutableBigInteger.<init>(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.modInverse(BigInteger.java:Unknown line)
+TRACE 301533:
+	java.math.MutableBigInteger.getLowestSetBit(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.modInverse(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.mutableModInverse(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.modInverse(BigInteger.java:Unknown line)
+TRACE 301469:
+	java.math.MutableBigInteger.<init>(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.remainder(BigInteger.java:Unknown line)
+	java.math.BigInteger.mod(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+TRACE 301486:
+	java.math.BigInteger.<init>(BigInteger.java:Unknown line)
+	java.math.BigInteger.shiftRight(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+TRACE 301487:
+	java.math.BigInteger.shiftRight(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+	piwords.PiGenerator.piTerm(PiGenerator.java:Unknown line)
+TRACE 301601:
+	java.math.MutableBigInteger.clear(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.divide(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.oddModPow(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+TRACE 301489:
+	java.math.BigInteger.<init>(BigInteger.java:Unknown line)
+	java.math.BigInteger.shiftLeft(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+TRACE 301477:
+	java.math.BigInteger.mod(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+	piwords.PiGenerator.piTerm(PiGenerator.java:Unknown line)
+TRACE 301393:
+	sun.misc.FpUtils.getExponent(FpUtils.java:Unknown line)
+	java.lang.Math.getExponent(Math.java:Unknown line)
+	java.lang.StrictMath.floorOrCeil(StrictMath.java:Unknown line)
+	java.lang.StrictMath.floor(StrictMath.java:Unknown line)
+TRACE 301516:
+	java.math.BigInteger.stripLeadingZeroInts(BigInteger.java:Unknown line)
+	java.math.BigInteger.<init>(BigInteger.java:Unknown line)
+	java.math.BigInteger.mod2(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow2(BigInteger.java:Unknown line)
+TRACE 301509:
+	java.lang.Number.<init>(Number.java:Unknown line)
+	java.math.BigInteger.<init>(BigInteger.java:Unknown line)
+	java.math.MutableBigInteger.toBigInteger(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.remainder(BigInteger.java:Unknown line)
+TRACE 301603:
+	java.math.MutableBigInteger.normalize(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.divideOneWord(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.divide(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.oddModPow(BigInteger.java:Unknown line)
+TRACE 301504:
+	java.math.BigInteger.compareMagnitude(BigInteger.java:Unknown line)
+	java.math.BigInteger.modInverse(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+TRACE 301590:
+	java.lang.Integer.numberOfLeadingZeros(Integer.java:Unknown line)
+	java.math.BigInteger.bitLengthForInt(BigInteger.java:Unknown line)
+	java.math.BigInteger.bitLength(BigInteger.java:Unknown line)
+	java.math.BigInteger.oddModPow(BigInteger.java:Unknown line)
+TRACE 301543:
+	java.math.MutableBigInteger.mul(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.fixup(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.modInverse(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.mutableModInverse(MutableBigInteger.java:Unknown line)
+TRACE 301455:
+	java.math.BigInteger.getInt(BigInteger.java:Unknown line)
+	java.math.BigInteger.intValue(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+	piwords.PiGenerator.piTerm(PiGenerator.java:Unknown line)
+TRACE 301564:
+	java.lang.Math.min(Math.java:Unknown line)
+	java.util.Arrays.copyOfRange(Arrays.java:Unknown line)
+	java.math.BigInteger.trustedStripLeadingZeroInts(BigInteger.java:Unknown line)
+	java.math.BigInteger.multiply(BigInteger.java:Unknown line)
+TRACE 301567:
+	java.lang.Number.<init>(Number.java:Unknown line)
+	java.math.BigInteger.<init>(BigInteger.java:Unknown line)
+	java.math.BigInteger.multiply(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+TRACE 301535:
+	java.math.BigInteger.bitLengthForInt(BigInteger.java:Unknown line)
+	java.math.MutableBigInteger.rightShift(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.modInverse(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.mutableModInverse(MutableBigInteger.java:Unknown line)
+TRACE 301528:
+	java.math.SignedMutableBigInteger.<init>(SignedMutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.modInverse(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.mutableModInverse(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.modInverse(BigInteger.java:Unknown line)
+TRACE 301600:
+	java.math.MutableBigInteger.compare(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.divide(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.oddModPow(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+TRACE 301596:
+	java.math.BigInteger.primitiveLeftShift(BigInteger.java:Unknown line)
+	java.math.BigInteger.leftShift(BigInteger.java:Unknown line)
+	java.math.BigInteger.oddModPow(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+TRACE 301558:
+	java.math.MutableBigInteger.<init>(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.remainder(BigInteger.java:Unknown line)
+	java.math.BigInteger.mod(BigInteger.java:Unknown line)
+	java.math.BigInteger.modInverse(BigInteger.java:Unknown line)
+TRACE 301593:
+	java.math.MutableBigInteger.inverseMod32(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.oddModPow(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+TRACE 301515:
+	java.util.Arrays.copyOfRange(Arrays.java:Unknown line)
+	java.math.BigInteger.stripLeadingZeroInts(BigInteger.java:Unknown line)
+	java.math.BigInteger.<init>(BigInteger.java:Unknown line)
+	java.math.BigInteger.mod2(BigInteger.java:Unknown line)
+TRACE 301470:
+	java.math.MutableBigInteger.compare(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.divide(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.remainder(BigInteger.java:Unknown line)
+	java.math.BigInteger.mod(BigInteger.java:Unknown line)
+TRACE 301508:
+	java.math.MutableBigInteger.getMagnitudeArray(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.toBigInteger(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.remainder(BigInteger.java:Unknown line)
+	java.math.BigInteger.mod(BigInteger.java:Unknown line)
+TRACE 301562:
+	java.math.BigInteger.mod(BigInteger.java:Unknown line)
+	java.math.BigInteger.modInverse(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+TRACE 301530:
+	java.math.SignedMutableBigInteger.<init>(SignedMutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.modInverse(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.mutableModInverse(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.modInverse(BigInteger.java:Unknown line)
+TRACE 301478:
+	java.math.BigInteger.getInt(BigInteger.java:Unknown line)
+	java.math.BigInteger.testBit(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+TRACE 301472:
+	java.math.MutableBigInteger.divideOneWord(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.divide(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.remainder(BigInteger.java:Unknown line)
+	java.math.BigInteger.mod(BigInteger.java:Unknown line)
+TRACE 301602:
+	java.lang.Integer.numberOfLeadingZeros(Integer.java:Unknown line)
+	java.math.MutableBigInteger.divideOneWord(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.divide(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.oddModPow(BigInteger.java:Unknown line)
+TRACE 301546:
+	java.math.BigInteger.bitLengthForInt(BigInteger.java:Unknown line)
+	java.math.MutableBigInteger.rightShift(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.fixup(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.modInverse(MutableBigInteger.java:Unknown line)
+TRACE 301598:
+	java.math.MutableBigInteger.<init>(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.oddModPow(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+TRACE 301563:
+	java.math.BigInteger.multiplyToLen(BigInteger.java:Unknown line)
+	java.math.BigInteger.multiply(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+TRACE 301616:
+	java.lang.Number.<init>(Number.java:Unknown line)
+	java.math.BigInteger.<init>(BigInteger.java:Unknown line)
+	java.math.BigInteger.oddModPow(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+TRACE 301607:
+	java.math.MutableBigInteger.toIntArray(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.oddModPow(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+TRACE 301490:
+	java.math.BigInteger.shiftLeft(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+	piwords.PiGenerator.piTerm(PiGenerator.java:Unknown line)
+TRACE 301594:
+	java.lang.Integer.numberOfLeadingZeros(Integer.java:Unknown line)
+	java.math.BigInteger.bitLengthForInt(BigInteger.java:Unknown line)
+	java.math.BigInteger.leftShift(BigInteger.java:Unknown line)
+	java.math.BigInteger.oddModPow(BigInteger.java:Unknown line)
+TRACE 301605:
+	java.math.MutableBigInteger.<init>(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.divide(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.oddModPow(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+TRACE 301471:
+	java.math.MutableBigInteger.clear(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.divide(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.remainder(BigInteger.java:Unknown line)
+	java.math.BigInteger.mod(BigInteger.java:Unknown line)
+TRACE 301480:
+	java.math.BigInteger.equals(BigInteger.java:Unknown line)
+	java.math.BigInteger.oddModPow(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+TRACE 301496:
+	java.math.BigInteger.bitLength(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow2(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+TRACE 301495:
+	java.math.BigInteger.bitLengthForInt(BigInteger.java:Unknown line)
+	java.math.BigInteger.bitLength(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow2(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+TRACE 301507:
+	java.math.MutableBigInteger.<init>(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.divide(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.remainder(BigInteger.java:Unknown line)
+	java.math.BigInteger.mod(BigInteger.java:Unknown line)
+TRACE 301553:
+	java.math.MutableBigInteger.getMagnitudeArray(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.toBigInteger(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.modInverse(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+TRACE 301549:
+	java.math.MutableBigInteger.compare(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.fixup(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.modInverse(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.mutableModInverse(MutableBigInteger.java:Unknown line)
+TRACE 301557:
+	java.math.MutableBigInteger.<init>(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.remainder(BigInteger.java:Unknown line)
+	java.math.BigInteger.mod(BigInteger.java:Unknown line)
+	java.math.BigInteger.modInverse(BigInteger.java:Unknown line)
+TRACE 301544:
+	java.math.MutableBigInteger.add(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.fixup(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.modInverse(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.mutableModInverse(MutableBigInteger.java:Unknown line)
+TRACE 301527:
+	java.math.MutableBigInteger.<init>(MutableBigInteger.java:Unknown line)
+	java.math.SignedMutableBigInteger.<init>(SignedMutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.modInverse(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.mutableModInverse(MutableBigInteger.java:Unknown line)
+TRACE 301547:
+	java.math.MutableBigInteger.primitiveRightShift(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.rightShift(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.fixup(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.modInverse(MutableBigInteger.java:Unknown line)
+TRACE 301532:
+	java.lang.Integer.numberOfTrailingZeros(Integer.java:Unknown line)
+	java.math.MutableBigInteger.getLowestSetBit(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.modInverse(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.mutableModInverse(MutableBigInteger.java:Unknown line)
+TRACE 301589:
+	java.math.MutableBigInteger.modInverseMP2(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.mutableModInverse(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.modInverse(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+TRACE 301488:
+	java.lang.Number.<init>(Number.java:Unknown line)
+	java.math.BigInteger.<init>(BigInteger.java:Unknown line)
+	java.math.BigInteger.shiftLeft(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+TRACE 301584:
+	java.math.MutableBigInteger.rightShift(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.mutableModInverse(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.modInverse(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+TRACE 301554:
+	java.lang.Number.<init>(Number.java:Unknown line)
+	java.math.BigInteger.<init>(BigInteger.java:Unknown line)
+	java.math.MutableBigInteger.toBigInteger(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.modInverse(BigInteger.java:Unknown line)
+TRACE 301714:
+	sun.misc.Signal.dispatch(Signal.java:Unknown line)
+TRACE 301539:
+	java.math.MutableBigInteger.isOne(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.modInverse(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.mutableModInverse(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.modInverse(BigInteger.java:Unknown line)
+TRACE 301485:
+	java.lang.Number.<init>(Number.java:Unknown line)
+	java.math.BigInteger.<init>(BigInteger.java:Unknown line)
+	java.math.BigInteger.shiftRight(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+TRACE 301491:
+	java.math.BigInteger.valueOf(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow2(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+TRACE 301540:
+	java.math.MutableBigInteger.<init>(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.fixup(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.modInverse(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.mutableModInverse(MutableBigInteger.java:Unknown line)
+TRACE 301521:
+	java.math.MutableBigInteger.isZero(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.isOdd(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.mutableModInverse(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.modInverse(BigInteger.java:Unknown line)
+TRACE 301531:
+	java.math.MutableBigInteger.isEven(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.modInverse(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.mutableModInverse(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.modInverse(BigInteger.java:Unknown line)
+TRACE 301538:
+	java.math.MutableBigInteger.leftShift(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.modInverse(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.mutableModInverse(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.modInverse(BigInteger.java:Unknown line)
+TRACE 301541:
+	java.math.MutableBigInteger.inverseMod32(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.fixup(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.modInverse(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.mutableModInverse(MutableBigInteger.java:Unknown line)
+TRACE 301542:
+	java.math.MutableBigInteger.copyValue(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.mul(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.fixup(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.modInverse(MutableBigInteger.java:Unknown line)
+TRACE 301545:
+	java.lang.Integer.numberOfLeadingZeros(Integer.java:Unknown line)
+	java.math.BigInteger.bitLengthForInt(BigInteger.java:Unknown line)
+	java.math.MutableBigInteger.rightShift(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.fixup(MutableBigInteger.java:Unknown line)
+TRACE 301529:
+	java.math.MutableBigInteger.<init>(MutableBigInteger.java:Unknown line)
+	java.math.SignedMutableBigInteger.<init>(SignedMutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.modInverse(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.mutableModInverse(MutableBigInteger.java:Unknown line)
+TRACE 301513:
+	java.lang.Number.<init>(Number.java:Unknown line)
+	java.math.BigInteger.<init>(BigInteger.java:Unknown line)
+	java.math.BigInteger.mod2(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow2(BigInteger.java:Unknown line)
+TRACE 301483:
+	java.lang.Integer.numberOfTrailingZeros(Integer.java:Unknown line)
+	java.math.BigInteger.getLowestSetBit(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+TRACE 300820:
+	sun.misc.PerfCounter.<init>(PerfCounter.java:Unknown line)
+	sun.misc.PerfCounter.newPerfCounter(PerfCounter.java:Unknown line)
+	sun.misc.PerfCounter$CoreCounters.<clinit>(PerfCounter.java:Unknown line)
+	sun.misc.PerfCounter.getReadClassBytesTime(PerfCounter.java:Unknown line)
+TRACE 301482:
+	java.math.BigInteger.getInt(BigInteger.java:Unknown line)
+	java.math.BigInteger.getLowestSetBit(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+TRACE 300217:
+	java.lang.ClassLoader.findBootstrapClassOrNull(ClassLoader.java:Unknown line)
+	java.lang.ClassLoader.loadClass(ClassLoader.java:Unknown line)
+	java.lang.ClassLoader.loadClass(ClassLoader.java:Unknown line)
+	sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:Unknown line)
+TRACE 301506:
+	java.math.BigInteger.add(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+	piwords.PiGenerator.powerMod(PiGenerator.java:Unknown line)
+	piwords.PiGenerator.piTerm(PiGenerator.java:Unknown line)
+TRACE 301536:
+	java.math.MutableBigInteger.primitiveRightShift(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.rightShift(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.modInverse(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.mutableModInverse(MutableBigInteger.java:Unknown line)
+TRACE 301468:
+	java.math.MutableBigInteger.<init>(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.remainder(BigInteger.java:Unknown line)
+	java.math.BigInteger.mod(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+TRACE 301494:
+	java.lang.Integer.numberOfLeadingZeros(Integer.java:Unknown line)
+	java.math.BigInteger.bitLengthForInt(BigInteger.java:Unknown line)
+	java.math.BigInteger.bitLength(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow2(BigInteger.java:Unknown line)
+TRACE 301397:
+	java.lang.Math.floor(Math.java:Unknown line)
+	piwords.PiGenerator.piDigit(PiGenerator.java:Unknown line)
+	piwords.PiGenerator.computePiInHex(PiGenerator.java:Unknown line)
+	piwords.Main.main(Main.java:Unknown line)
+TRACE 301582:
+	java.math.BigInteger.bitLengthForInt(BigInteger.java:Unknown line)
+	java.math.MutableBigInteger.rightShift(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.mutableModInverse(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.modInverse(BigInteger.java:Unknown line)
+TRACE 300703:
+	java.lang.ClassLoader.getPackage(ClassLoader.java:Unknown line)
+	java.lang.ClassLoader.getPackage(ClassLoader.java:Unknown line)
+	java.net.URLClassLoader.getAndVerifyPackage(URLClassLoader.java:Unknown line)
+	java.net.URLClassLoader.defineClass(URLClassLoader.java:Unknown line)
+TRACE 301534:
+	java.lang.Integer.numberOfLeadingZeros(Integer.java:Unknown line)
+	java.math.BigInteger.bitLengthForInt(BigInteger.java:Unknown line)
+	java.math.MutableBigInteger.rightShift(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.modInverse(MutableBigInteger.java:Unknown line)
+TRACE 300908:
+	sun.net.www.protocol.file.Handler.createFileURLConnection(Handler.java:Unknown line)
+	sun.net.www.protocol.file.Handler.openConnection(Handler.java:Unknown line)
+	sun.net.www.protocol.file.Handler.openConnection(Handler.java:Unknown line)
+	java.net.URL.openConnection(URL.java:Unknown line)
+TRACE 301587:
+	java.math.MutableBigInteger.inverseMod32(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.modInverseMP2(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.mutableModInverse(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.modInverse(BigInteger.java:Unknown line)
+TRACE 301577:
+	java.math.MutableBigInteger.getLowestSetBit(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.mutableModInverse(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.modInverse(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+TRACE 301570:
+	java.util.Arrays.copyOfRange(Arrays.java:Unknown line)
+	java.math.MutableBigInteger.<init>(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.divide(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.remainder(BigInteger.java:Unknown line)
+TRACE 301232:
+	sun.launcher.LauncherHelper.getMainMethod(LauncherHelper.java:Unknown line)
+	sun.launcher.LauncherHelper.checkAndLoadMain(LauncherHelper.java:Unknown line)
+TRACE 300958:
+	sun.net.www.protocol.file.FileURLConnection.getPermission(FileURLConnection.java:Unknown line)
+	java.net.URLClassLoader.getPermissions(URLClassLoader.java:Unknown line)
+	sun.misc.Launcher$AppClassLoader.getPermissions(Launcher.java:Unknown line)
+	java.security.SecureClassLoader.getProtectionDomain(SecureClassLoader.java:Unknown line)
+TRACE 301579:
+	java.util.Arrays.copyOfRange(Arrays.java:Unknown line)
+	java.math.MutableBigInteger.<init>(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.mutableModInverse(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.modInverse(BigInteger.java:Unknown line)
+TRACE 301569:
+	java.lang.Math.min(Math.java:Unknown line)
+	java.util.Arrays.copyOfRange(Arrays.java:Unknown line)
+	java.math.MutableBigInteger.<init>(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.divide(MutableBigInteger.java:Unknown line)
+TRACE 301571:
+	java.math.MutableBigInteger.<init>(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.divide(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.remainder(BigInteger.java:Unknown line)
+	java.math.BigInteger.mod(BigInteger.java:Unknown line)
+TRACE 301576:
+	java.lang.Integer.numberOfTrailingZeros(Integer.java:Unknown line)
+	java.math.MutableBigInteger.getLowestSetBit(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.mutableModInverse(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.modInverse(BigInteger.java:Unknown line)
+TRACE 300375:
+	java.io.Win32FileSystem.normalize(Win32FileSystem.java:Unknown line)
+	java.io.Win32FileSystem.normalize(Win32FileSystem.java:Unknown line)
+	java.io.File.<init>(File.java:Unknown line)
+	sun.misc.URLClassPath$JarLoader.<init>(URLClassPath.java:Unknown line)
+TRACE 301586:
+	java.math.MutableBigInteger.isEven(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.modInverseMP2(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.mutableModInverse(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.modInverse(BigInteger.java:Unknown line)
+TRACE 301580:
+	java.math.MutableBigInteger.<init>(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.mutableModInverse(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.modInverse(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+TRACE 301575:
+	java.math.MutableBigInteger.isEven(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.mutableModInverse(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.modInverse(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+TRACE 301585:
+	java.math.MutableBigInteger.isOne(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.mutableModInverse(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.modInverse(BigInteger.java:Unknown line)
+	java.math.BigInteger.modPow(BigInteger.java:Unknown line)
+TRACE 301578:
+	java.lang.Math.min(Math.java:Unknown line)
+	java.util.Arrays.copyOfRange(Arrays.java:Unknown line)
+	java.math.MutableBigInteger.<init>(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.mutableModInverse(MutableBigInteger.java:Unknown line)
+TRACE 300371:
+	java.lang.StringBuffer.append(StringBuffer.java:Unknown line)
+	java.io.Win32FileSystem.normalize(Win32FileSystem.java:Unknown line)
+	java.io.Win32FileSystem.normalize(Win32FileSystem.java:Unknown line)
+	java.io.File.<init>(File.java:Unknown line)
+TRACE 301583:
+	java.math.MutableBigInteger.primitiveRightShift(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.rightShift(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.mutableModInverse(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.modInverse(BigInteger.java:Unknown line)
+TRACE 300390:
+	java.lang.CharacterDataLatin1.toLowerCase(CharacterDataLatin1.java:Unknown line)
+	java.lang.Character.toLowerCase(Character.java:Unknown line)
+	java.lang.String.toLowerCase(String.java:Unknown line)
+	java.io.Win32FileSystem.hashCode(Win32FileSystem.java:Unknown line)
+TRACE 300449:
+	sun.misc.URLClassPath.getLoader(URLClassPath.java:Unknown line)
+	sun.misc.URLClassPath.getResource(URLClassPath.java:Unknown line)
+	java.net.URLClassLoader$1.run(URLClassLoader.java:Unknown line)
+	java.net.URLClassLoader$1.run(URLClassLoader.java:Unknown line)
+TRACE 300368:
+	java.io.Win32FileSystem.isSlash(Win32FileSystem.java:Unknown line)
+	java.io.Win32FileSystem.normalize(Win32FileSystem.java:Unknown line)
+	java.io.Win32FileSystem.normalize(Win32FileSystem.java:Unknown line)
+	java.io.File.<init>(File.java:Unknown line)
+TRACE 301581:
+	java.lang.Integer.numberOfLeadingZeros(Integer.java:Unknown line)
+	java.math.BigInteger.bitLengthForInt(BigInteger.java:Unknown line)
+	java.math.MutableBigInteger.rightShift(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.mutableModInverse(MutableBigInteger.java:Unknown line)
+TRACE 301588:
+	java.math.MutableBigInteger.<init>(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.modInverseMP2(MutableBigInteger.java:Unknown line)
+	java.math.MutableBigInteger.mutableModInverse(MutableBigInteger.java:Unknown line)
+	java.math.BigInteger.modInverse(BigInteger.java:Unknown line)
+TRACE 300370:
+	java.lang.AbstractStringBuilder.append(AbstractStringBuilder.java:Unknown line)
+	java.lang.StringBuffer.append(StringBuffer.java:Unknown line)
+	java.io.Win32FileSystem.normalize(Win32FileSystem.java:Unknown line)
+	java.io.Win32FileSystem.normalize(Win32FileSystem.java:Unknown line)
+TRACE 300388:
+	java.lang.CharacterData.of(CharacterData.java:Unknown line)
+	java.lang.Character.toLowerCase(Character.java:Unknown line)
+	java.lang.String.toLowerCase(String.java:Unknown line)
+	java.io.Win32FileSystem.hashCode(Win32FileSystem.java:Unknown line)
+TRACE 300405:
+	java.lang.String$CaseInsensitiveComparator.compare(String.java:Unknown line)
+	java.lang.String$CaseInsensitiveComparator.compare(String.java:Unknown line)
+	java.lang.String.compareToIgnoreCase(String.java:Unknown line)
+	java.io.Win32FileSystem.compare(Win32FileSystem.java:Unknown line)
+TRACE 300931:
+	java.io.Win32FileSystem.normalize(Win32FileSystem.java:Unknown line)
+	java.io.Win32FileSystem.normalize(Win32FileSystem.java:Unknown line)
+	java.io.File.<init>(File.java:Unknown line)
+	java.io.FilePermission$1.run(FilePermission.java:Unknown line)
+TRACE 300369:
+	java.lang.AbstractStringBuilder.ensureCapacityInternal(AbstractStringBuilder.java:Unknown line)
+	java.lang.AbstractStringBuilder.append(AbstractStringBuilder.java:Unknown line)
+	java.lang.StringBuffer.append(StringBuffer.java:Unknown line)
+	java.io.Win32FileSystem.normalize(Win32FileSystem.java:Unknown line)
+TRACE 300389:
+	java.lang.CharacterDataLatin1.getProperties(CharacterDataLatin1.java:Unknown line)
+	java.lang.CharacterDataLatin1.toLowerCase(CharacterDataLatin1.java:Unknown line)
+	java.lang.Character.toLowerCase(Character.java:Unknown line)
+	java.lang.String.toLowerCase(String.java:Unknown line)
+CPU TIME (ms) BEGIN (total = 21953) Mon Dec 23 14:54:19 2013
+rank   self  accum   count trace method
+   1  7.63%  7.63%  120649 301615 java.math.BigInteger.montReduce
+   2  6.91% 14.54%   17707 301481 java.math.BigInteger.oddModPow
+   3  4.63% 19.17%   71102 301611 java.math.BigInteger.squareToLen
+   4  4.10% 23.27%   18180 301453 java.math.BigInteger.modPow
+   5  3.27% 26.54%    8871 301501 java.math.BigInteger.modPow2
+   6  2.19% 28.73%   69919 301493 java.math.BigInteger.mod2
+   7  2.05% 30.79%  120649 301612 java.math.BigInteger.mulAdd
+   8  2.00% 32.79%   17742 301503 java.math.BigInteger.modInverse
+   9  1.86% 34.66%    8684 301551 java.math.MutableBigInteger.modInverse
+  10  1.81% 36.47%  120649 301613 java.math.BigInteger.addOne
+  11  1.77% 38.24%  120649 301614 java.math.BigInteger.intArrayCmpToLen
+  12  1.61% 39.85%   18179 301457 piwords.PiGenerator.powerMod
+  13  1.56% 41.41%   53618 301499 java.math.BigInteger.testBit
+  14  1.43% 42.84%   17240 301606 java.math.MutableBigInteger.divide
+  15  1.36% 44.20%   54540 301451 java.math.BigInteger.valueOf
+  16  1.34% 45.54%   35484 301505 java.math.BigInteger.multiply
+  17  1.18% 46.72%   71102 301610 java.math.BigInteger.primitiveLeftShift
+  18  1.13% 47.86%   10713 301476 java.math.BigInteger.remainder
+  19  1.13% 48.99%   71102 301609 java.math.BigInteger.addOne
+  20  1.12% 50.11%   69919 301492 java.math.BigInteger.bitLength
+  21  1.05% 51.15%   29705 301573 java.math.BigInteger.<init>
+  22  1.02% 52.18%   71102 301608 java.math.BigInteger.mulAdd
+  23  1.02% 53.20%    8684 301550 java.math.MutableBigInteger.fixup
+  24  0.98% 54.18%   17240 301604 java.math.MutableBigInteger.divideOneWord
+  25  0.88% 55.07%   17240 301597 java.math.BigInteger.leftShift
+  26  0.86% 55.93%    8777 301561 java.math.BigInteger.remainder
+  27  0.85% 56.78%   62653 301452 java.math.BigInteger.equals
+  28  0.83% 57.61%   10713 301474 java.math.MutableBigInteger.divide
+  29  0.82% 58.43%   53618 301498 java.math.BigInteger.getInt
+  30  0.81% 59.24%   26672 301462 java.math.BigInteger.compareTo
+  31  0.77% 60.01%   26052 301525 java.math.MutableBigInteger.<init>
+  32  0.75% 60.77%   17240 301619 java.math.BigInteger.<init>
+  33  0.75% 61.52%   26052 301524 java.util.Arrays.copyOfRange
+  34  0.74% 62.26%   21786 301519 java.util.Arrays.copyOf
+  35  0.74% 63.00%    8777 301559 java.math.MutableBigInteger.divide
+  36  0.73% 63.73%   10893 301552 java.math.MutableBigInteger.mutableModInverse
+  37  0.67% 64.39%     383 301383 piwords.PiGenerator.piTerm
+  38  0.66% 65.05%   21786 301520 java.math.MutableBigInteger.<init>
+  39  0.66% 65.70%   17554 301565 java.util.Arrays.copyOfRange
+  40  0.63% 66.34%   35876 301574 java.math.BigInteger.square
+  41  0.62% 66.96%   17240 301591 java.math.BigInteger.bitLengthForInt
+  42  0.62% 67.58%   18179 301458 java.lang.StrictMath.floorOrCeil
+  43  0.62% 68.20%   17240 301618 java.math.BigInteger.stripLeadingZeroInts
+  44  0.61% 68.81%   17801 301479 java.math.BigInteger.testBit
+  45  0.60% 69.41%   17240 301617 java.util.Arrays.copyOfRange
+  46  0.59% 69.99%   18179 301456 java.math.BigInteger.intValue
+  47  0.57% 70.56%   19114 301510 java.math.BigInteger.<init>
+  48  0.56% 71.13%   18179 301459 java.lang.StrictMath.floor
+  49  0.56% 71.69%   35390 301502 java.math.BigInteger.equals
+  50  0.55% 72.24%   17240 301595 java.math.BigInteger.bitLengthForInt
+  51  0.54% 72.78%   10713 301475 java.math.MutableBigInteger.toBigInteger
+  52  0.51% 73.29%   10893 301556 java.math.MutableBigInteger.toBigInteger
+  53  0.51% 73.81%   18274 301394 java.lang.Math.getExponent
+  54  0.51% 74.31%   17240 301592 java.math.BigInteger.bitLength
+  55  0.51% 74.82%   17554 301568 java.math.BigInteger.<init>
+  56  0.49% 75.31%   18179 301460 java.lang.Math.floor
+  57  0.47% 75.78%    8684 301537 java.math.MutableBigInteger.rightShift
+  58  0.47% 76.26%   34480 301599 java.math.MutableBigInteger.<init>
+  59  0.47% 76.73%   32307 301620 java.math.BigInteger.multiplyToLen
+  60  0.45% 77.18%   17554 301566 java.math.BigInteger.trustedStripLeadingZeroInts
+  61  0.45% 77.63%    8777 301517 java.math.BigInteger.<init>
+  62  0.44% 78.07%   29705 301572 java.lang.Number.<init>
+  63  0.44% 78.50%   26052 301523 java.lang.Math.min
+  64  0.44% 78.94%    8871 301484 java.math.BigInteger.getLowestSetBit
+  65  0.43% 79.37%    8777 301560 java.math.MutableBigInteger.toBigInteger
+  66  0.43% 79.80%   10893 301522 java.math.MutableBigInteger.isOdd
+  67  0.42% 80.22%    8684 301548 java.math.MutableBigInteger.rightShift
+  68  0.40% 80.62%   26672 301461 java.math.BigInteger.compareMagnitude
+  69  0.39% 81.01%   25172 301500 java.math.BigInteger.multiply
+  70  0.39% 81.40%   26017 301514 java.lang.Math.min
+  71  0.37% 81.77%       7 300755 java.io.FileInputStream.read
+  72  0.37% 82.14%   10893 301555 java.math.BigInteger.<init>
+  73  0.36% 82.51%   21786 301518 java.lang.Math.min
+  74  0.33% 82.84%    8684 301533 java.math.MutableBigInteger.getLowestSetBit
+  75  0.33% 83.17%   21426 301469 java.math.MutableBigInteger.<init>
+  76  0.32% 83.49%    8871 301486 java.math.BigInteger.<init>
+  77  0.32% 83.81%    8871 301487 java.math.BigInteger.shiftRight
+  78  0.32% 84.13%   17240 301601 java.math.MutableBigInteger.clear
+  79  0.31% 84.43%    8871 301489 java.math.BigInteger.<init>
+  80  0.31% 84.74%   10713 301477 java.math.BigInteger.mod
+  81  0.31% 85.05%   18274 301393 sun.misc.FpUtils.getExponent
+  82  0.31% 85.36%    8777 301516 java.math.BigInteger.stripLeadingZeroInts
+  83  0.30% 85.65%   19114 301509 java.lang.Number.<init>
+  84  0.30% 85.95%   17240 301603 java.math.MutableBigInteger.normalize
+  85  0.30% 86.24%   17648 301504 java.math.BigInteger.compareMagnitude
+  86  0.30% 86.54%   17240 301590 java.lang.Integer.numberOfLeadingZeros
+  87  0.29% 86.83%    8684 301543 java.math.MutableBigInteger.mul
+  88  0.29% 87.12%   18180 301455 java.math.BigInteger.getInt
+  89  0.29% 87.41%   17554 301564 java.lang.Math.min
+  90  0.29% 87.70%   17554 301567 java.lang.Number.<init>
+  91  0.28% 87.98%    8684 301535 java.math.BigInteger.bitLengthForInt
+  92  0.28% 88.26%    8684 301528 java.math.SignedMutableBigInteger.<init>
+  93  0.28% 88.54%   17240 301600 java.math.MutableBigInteger.compare
+  94  0.28% 88.82%   17240 301596 java.math.BigInteger.primitiveLeftShift
+  95  0.28% 89.09%   17554 301558 java.math.MutableBigInteger.<init>
+  96  0.27% 89.36%   17240 301593 java.math.MutableBigInteger.inverseMod32
+  97  0.26% 89.63%    8777 301515 java.util.Arrays.copyOfRange
+  98  0.26% 89.88%   19396 301470 java.math.MutableBigInteger.compare
+  99  0.26% 90.14%   19114 301508 java.math.MutableBigInteger.getMagnitudeArray
+ 100  0.25% 90.39%    8777 301562 java.math.BigInteger.mod
+ 101  0.25% 90.64%    8684 301530 java.math.SignedMutableBigInteger.<init>
+ 102  0.25% 90.89%   17801 301478 java.math.BigInteger.getInt
+ 103  0.25% 91.14%   17688 301472 java.math.MutableBigInteger.divideOneWord
+ 104  0.25% 91.38%   17240 301602 java.lang.Integer.numberOfLeadingZeros
+ 105  0.25% 91.63%    8684 301546 java.math.BigInteger.bitLengthForInt
+ 106  0.24% 91.87%   17240 301598 java.math.MutableBigInteger.<init>
+ 107  0.24% 92.11%   17554 301563 java.math.BigInteger.multiplyToLen
+ 108  0.24% 92.35%   17240 301616 java.lang.Number.<init>
+ 109  0.24% 92.58%   17240 301607 java.math.MutableBigInteger.toIntArray
+ 110  0.24% 92.82%    8871 301490 java.math.BigInteger.shiftLeft
+ 111  0.23% 93.05%   17240 301594 java.lang.Integer.numberOfLeadingZeros
+ 112  0.22% 93.27%   17240 301605 java.math.MutableBigInteger.<init>
+ 113  0.22% 93.49%   17688 301471 java.math.MutableBigInteger.clear
+ 114  0.20% 93.69%   17707 301480 java.math.BigInteger.equals
+ 115  0.20% 93.89%    8871 301496 java.math.BigInteger.bitLength
+ 116  0.19% 94.08%    6134 301495 java.math.BigInteger.bitLengthForInt
+ 117  0.19% 94.27%   17406 301507 java.math.MutableBigInteger.<init>
+ 118  0.18% 94.45%   10893 301553 java.math.MutableBigInteger.getMagnitudeArray
+ 119  0.17% 94.62%    8684 301549 java.math.MutableBigInteger.compare
+ 120  0.16% 94.78%    8777 301557 java.math.MutableBigInteger.<init>
+ 121  0.15% 94.93%    8684 301544 java.math.MutableBigInteger.add
+ 122  0.15% 95.08%    8684 301527 java.math.MutableBigInteger.<init>
+ 123  0.15% 95.23%    8684 301547 java.math.MutableBigInteger.primitiveRightShift
+ 124  0.15% 95.38%    8684 301532 java.lang.Integer.numberOfTrailingZeros
+ 125  0.15% 95.52%    2209 301589 java.math.MutableBigInteger.modInverseMP2
+ 126  0.14% 95.66%    8871 301488 java.lang.Number.<init>
+ 127  0.14% 95.80%    2209 301584 java.math.MutableBigInteger.rightShift
+ 128  0.14% 95.95%   10893 301554 java.lang.Number.<init>
+ 129  0.14% 96.08%       1 301714 sun.misc.Signal.dispatch
+ 130  0.14% 96.22%    8684 301539 java.math.MutableBigInteger.isOne
+ 131  0.13% 96.35%    8871 301485 java.lang.Number.<init>
+ 132  0.13% 96.48%    8871 301491 java.math.BigInteger.valueOf
+ 133  0.13% 96.61%    8684 301540 java.math.MutableBigInteger.<init>
+ 134  0.12% 96.73%   10893 301521 java.math.MutableBigInteger.isZero
+ 135  0.12% 96.85%    8684 301531 java.math.MutableBigInteger.isEven
+ 136  0.12% 96.98%    8684 301538 java.math.MutableBigInteger.leftShift
+ 137  0.12% 97.09%    8684 301541 java.math.MutableBigInteger.inverseMod32
+ 138  0.11% 97.21%    6522 301542 java.math.MutableBigInteger.copyValue
+ 139  0.11% 97.32%    8684 301545 java.lang.Integer.numberOfLeadingZeros
+ 140  0.11% 97.44%    8684 301529 java.math.MutableBigInteger.<init>
+ 141  0.11% 97.55%    8777 301513 java.lang.Number.<init>
+ 142  0.10% 97.65%    8501 301483 java.lang.Integer.numberOfTrailingZeros
+ 143  0.10% 97.76%       6 300820 sun.misc.PerfCounter.<init>
+ 144  0.10% 97.86%    8501 301482 java.math.BigInteger.getInt
+ 145  0.10% 97.96%       9 300217 java.lang.ClassLoader.findBootstrapClassOrNull
+ 146  0.10% 98.06%    8871 301506 java.math.BigInteger.add
+ 147  0.10% 98.16%    8684 301536 java.math.MutableBigInteger.primitiveRightShift
+ 148  0.10% 98.26%   10713 301468 java.math.MutableBigInteger.<init>
+ 149  0.09% 98.34%    6134 301494 java.lang.Integer.numberOfLeadingZeros
+ 150  0.08% 98.42%      95 301397 java.lang.Math.floor
+ 151  0.08% 98.50%    2209 301582 java.math.BigInteger.bitLengthForInt
+ 152  0.07% 98.57%       1 300703 java.lang.ClassLoader.getPackage
+ 153  0.07% 98.65%    8684 301534 java.lang.Integer.numberOfLeadingZeros
+ 154  0.06% 98.71%       1 300908 sun.net.www.protocol.file.Handler.createFileURLConnection
+ 155  0.06% 98.77%    2209 301587 java.math.MutableBigInteger.inverseMod32
+ 156  0.06% 98.83%    2209 301577 java.math.MutableBigInteger.getLowestSetBit
+ 157  0.05% 98.88%    1708 301570 java.util.Arrays.copyOfRange
+ 158  0.05% 98.94%       1 301232 sun.launcher.LauncherHelper.getMainMethod
+ 159  0.05% 98.99%       1 300958 sun.net.www.protocol.file.FileURLConnection.getPermission
+ 160  0.05% 99.04%    2209 301579 java.util.Arrays.copyOfRange
+ 161  0.05% 99.08%    1708 301569 java.lang.Math.min
+ 162  0.05% 99.13%    1708 301571 java.math.MutableBigInteger.<init>
+ 163  0.04% 99.17%    2209 301576 java.lang.Integer.numberOfTrailingZeros
+ 164  0.04% 99.21%       9 300375 java.io.Win32FileSystem.normalize
+ 165  0.04% 99.25%    2209 301586 java.math.MutableBigInteger.isEven
+ 166  0.04% 99.29%    2209 301580 java.math.MutableBigInteger.<init>
+ 167  0.04% 99.33%    2209 301575 java.math.MutableBigInteger.isEven
+ 168  0.03% 99.36%    2209 301585 java.math.MutableBigInteger.isOne
+ 169  0.03% 99.39%    2209 301578 java.lang.Math.min
+ 170  0.02% 99.41%     768 300371 java.lang.StringBuffer.append
+ 171  0.02% 99.44%    2209 301583 java.math.MutableBigInteger.primitiveRightShift
+ 172  0.02% 99.46%     456 300390 java.lang.CharacterDataLatin1.toLowerCase
+ 173  0.02% 99.48%      22 300449 sun.misc.URLClassPath.getLoader
+ 174  0.02% 99.50%     859 300368 java.io.Win32FileSystem.isSlash
+ 175  0.02% 99.52%    2209 301581 java.lang.Integer.numberOfLeadingZeros
+ 176  0.02% 99.54%    2209 301588 java.math.MutableBigInteger.<init>
+ 177  0.02% 99.55%     768 300370 java.lang.AbstractStringBuilder.append
+ 178  0.02% 99.57%     456 300388 java.lang.CharacterData.of
+ 179  0.02% 99.59%       9 300405 java.lang.String$CaseInsensitiveComparator.compare
+ 180  0.01% 99.60%       2 300931 java.io.Win32FileSystem.normalize
+ 181  0.01% 99.62%     768 300369 java.lang.AbstractStringBuilder.ensureCapacityInternal
+ 182  0.01% 99.63%     456 300389 java.lang.CharacterDataLatin1.getProperties
+CPU TIME (ms) END

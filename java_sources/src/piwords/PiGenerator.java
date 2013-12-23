@@ -1,3 +1,7 @@
+package piwords;
+
+import java.math.BigInteger;
+
 public class PiGenerator {
     /* package piwords; */
     /**
@@ -12,7 +16,12 @@ public class PiGenerator {
      */
     public static int[] computePiInHex(int precision) {
         // TODO: Implement (Problem 1.d)
-        return new int[0];
+        //
+        int[] PiInHex = new int[precision];
+        for (int i = 0; i < precision; i++){
+            PiInHex[i] = PiGenerator.piDigit(i);
+        }
+        return PiInHex;
     }
 
     /**
@@ -33,47 +42,23 @@ public class PiGenerator {
     /* From online compiler */
     /* http://www.compileonline.com/compile_java_online.php */
 
-    public static void main(String []args){
-        System.out.println();
+    /* public static void main(String []args){ */
+    /*     System.out.println(); */
 
-        System.out.print(piDigit(0));
-        /* System.out.printf("%n NEW DIGIT %n"); */
-        System.out.print(" ");
-        System.out.print(piDigit(1));
-        /* System.out.printf("%n NEW DIGIT %n"); */
-        System.out.print(" ");
-        System.out.print(piDigit(2));
-        System.out.print(" ");
-        System.out.print(piDigit(3));
-        System.out.print(" ");
-        System.out.print(piDigit(4));
-        System.out.print(" ");
-        System.out.print(piDigit(5));
-        System.out.print(" ");
-        System.out.print(piDigit(6));
-        System.out.print(" ");
-        System.out.print(piDigit(7));
-        System.out.print(" ");
-        System.out.print(piDigit(8));
-        System.out.print(" ");
-        System.out.print(piDigit(9));
-        System.out.print(" ");
-        System.out.print(piDigit(10));
-        System.out.print(" ");
-        System.out.print(piDigit(11));
-        System.out.print(" ");
-        System.out.print(piDigit(12));
-        System.out.print(" ");
-        System.out.print(piDigit(13));
-        System.out.print(" ");
-        System.out.print(piDigit(14));
-        System.out.print(" ");
-        System.out.print(piDigit(15));
-        System.out.print(" ");
-        System.out.print(piDigit(16));
-
-        System.out.println();
-    }
+    /*     System.out.print(piDigit(0)); */
+    /*     /* System.out.printf("%n NEW DIGIT %n"); */
+    /*     System.out.print(" "); */
+    /*     System.out.print(piDigit(1)); */
+    /*     /* System.out.printf("%n NEW DIGIT %n"); */
+    /*     System.out.print(" "); */
+    /*     System.out.print(piDigit(2)); */
+    /*     System.out.print(" "); */
+    /*     System.out.print(piDigit(3)); */
+    /*     System.out.print(" "); */
+    /*     System.out.print(piDigit(4)); */
+    /*     System.out.print(" "); */
+    /*     System.out.println(); */
+    /* } */
 
     public static double powerMod(int a, int b, int m) {
         /*''' Computes a^b mod m
@@ -89,10 +74,15 @@ public class PiGenerator {
         double power;
 
         if (a < 0 | b < 0| m < 0) return -1;
-        power = Math.pow(a, b);
-        carryover = power % m;
+        /* power = Math.pow(a, b); */
+        /* carryover = power % m; */
+        BigInteger a_big = BigInteger.valueOf(a);
+        BigInteger b_big = BigInteger.valueOf(b);
+        BigInteger m_big = BigInteger.valueOf(m);
+        BigInteger result_big = a_big.modPow(b_big, m_big);
+        int result = result_big.intValue();
         /* System.out.printf("== return powerMod: %f ==%n", carryover); */
-        return carryover;
+        return result;
     }
 
     /**
