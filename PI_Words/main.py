@@ -1,8 +1,9 @@
 #!/usr/bin/python3
 import sys
 import os
+import logging
 from PI_Words.PI.PiGenerator import PiGenerator
-from PI_Words.PI.BaseTranslator import BaseTranslator
+from PI_Words.PI import BaseTranslator
 from PI_Words.PI.DigitsToStringConverter import DigitsToStringConverter
 from PI_Words.PI.AlphabetGenerator import AlphabetGenerator
 from PI_Words.PI.WordFinder import WordFinder
@@ -14,9 +15,9 @@ class Main:
 
     def __init__(self):
         self.WORD_LIST = []
-        __location__ = os.path.realpath(
+        self.__location__ = os.path.realpath(
             os.path.join(os.getcwd(), os.path.dirname(__file__)))
-        words_file = open(os.path.join(__location__, "words.list"), "r")
+        words_file = open(os.path.join(self.__location__, "words.list"), "r")
         for line in words_file:
             self.WORD_LIST.append(words_file.readline)
         words_file.close()
@@ -27,6 +28,8 @@ class Main:
 
     # @staticmethod
     def main(self, *args):
+        logging.basicConfig(level=logging.INFO, filename=os.path.join(self.__location__, "log"))
+
         print("Problem 1: Calculating Pi...")
         piHexDigits = PiGenerator.computePiInHex(self.PI_PRECISION)
         try:

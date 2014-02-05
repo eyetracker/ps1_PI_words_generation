@@ -29,7 +29,7 @@ class PiGenerator:
         if precision <= 0:
             return []
         PiInHex = []
-        for i in range(precision):
+        for i in range(1,precision+1):
             PiInHex.append(PiGenerator.piDigit(i))
         return PiInHex
 

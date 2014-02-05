@@ -64,7 +64,8 @@ def test_piDigit():
 
 def test_computePiInHex():
     assert PiGenerator.computePiInHex(0) == []
-    assert PiGenerator.computePiInHex(1) == [3]
+    # we're not interested in the leading 3 but only in pi's decimal places!
+    assert PiGenerator.computePiInHex(1) == [2]
     assert len(PiGenerator.computePiInHex(16)) == 16
-    assert PiGenerator.computePiInHex(16) == [3,2,4,3,15,6,10,8,8,8,5,10,3,0,8,13]
+    assert PiGenerator.computePiInHex(15) == [2,4,3,15,6,10,8,8,8,5,10,3,0,8,13]
 
