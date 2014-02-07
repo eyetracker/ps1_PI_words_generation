@@ -78,7 +78,7 @@ class PiGenerator:
         @param n The digit of Pi to retrieve in base-16.
         @return The nth digit of Pi in base-16.
 
-        NOTE: testing done in ../test/test_PiGeneratorTest.py|35|
+        TESTS: ../test/test_PiGeneratorTest.py|35|
         '''
 
         if n < 0:

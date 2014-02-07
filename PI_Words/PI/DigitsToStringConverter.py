@@ -17,7 +17,23 @@ class DigitsToStringConverter:
 
     @staticmethod
     def convertDigitsToString(digits, base, alphabet):
-        ''' TODO: Implement (Problem 3.b)
         '''
-        return NotImplemented
+        Problem 3.b
+        TESTS (Problem 3.a): ../test/test_DigitsToStringConverter.py|5|
+        '''
+        #catch invalid inputs, return 0
+        for i in digits:
+            if i > base or i < 0:
+                return 0
+        if len(alphabet) != base:
+            return 0
+
+        # Map digits by alphabet
+        output = []
+        for i in digits:
+            output.append(alphabet[i])
+        return ''.join(output)
+
+
+
 

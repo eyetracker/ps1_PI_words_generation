@@ -22,7 +22,7 @@ def test_basicNumberSerializer():
     assert expectedOutput == convert(inp, 4, alphabet)
 
 def test_bigNumberSerializer():
-    inp = [9,13,23,15,18,11,9,14,7,6,9,14,5]
+    inp = [8,12,22,14,17,10,8,13,6,5,8,13,4]
     alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
             'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
     base = len(alphabet)
