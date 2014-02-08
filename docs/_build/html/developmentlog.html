@@ -1,4 +1,3 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -14,7 +13,7 @@
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '0.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -25,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="PI_Words 0.1 documentation" href="index.html" />
-    <link rel="prev" title="Pi Words" href="description.html" /> 
+    <link rel="prev" title="Task behind Pi Words" href="description.html" /> 
   </head>
   <body>
     <div class="related">
@@ -35,7 +34,7 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="description.html" title="Pi Words"
+          <a href="description.html" title="Task behind Pi Words"
              accesskey="P">previous</a> |</li>
         <li><a href="index.html">PI_Words 0.1 documentation</a> &raquo;</li> 
       </ul>
@@ -80,6 +79,30 @@ Chained OR operators:</p>
 <dd>The power operator: <strong>**</strong></dd>
 </dl>
 </div>
+<div class="section" id="id1">
+<h2>21.12.2013<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p><strong>Porting java to python:</strong>
+Look out for</p>
+<blockquote>
+<div>for (int i; i &lt;= k; i++)
+for i in range(k+1)</div></blockquote>
+<p>default python ranges are short of one - cost me much time to find this.</p>
+<p><strong>Vim configuration</strong>
+Wasting much time to configure everything in Vim, just to encounter an exceptional case, which breaks all the nice setups, which often try to avoid the console.</p>
+<blockquote>
+<div>Embrace the console! Though async processing would be very nice...</div></blockquote>
+</div>
+<div class="section" id="id2">
+<h2>22.12.2013<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>a ** b is slow... cProfile shows, that this is a real bottleneck, whichs takes 90% of the computing time - annoying.
+Tested alternatives:</p>
+<blockquote>
+<div>math.pow(a, b) - no improvement
+power = eval(&#8216;a&#8217;+&#8217;<a href="#id3"><span class="problematic" id="id4">*</span></a>a&#8217;<a href="#id5"><span class="problematic" id="id6">*</span></a>(b-1)) - works, but MemoryError because of high &#8216;b&#8217;</div></blockquote>
+<p>Great idea from Game development:</p>
+<blockquote>
+<div>power tables! Pre-calculated power values!</div></blockquote>
+</div>
 </div>
 
 
@@ -93,13 +116,15 @@ Chained OR operators:</p>
 <li><a class="reference internal" href="#">1. Pi Generation</a><ul>
 <li><a class="reference internal" href="#the-assert-statement">The &#8216;assert&#8217; statement</a></li>
 <li><a class="reference internal" href="#about-specifications">About specifications</a></li>
+<li><a class="reference internal" href="#id1">21.12.2013</a></li>
+<li><a class="reference internal" href="#id2">22.12.2013</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="description.html"
-                        title="previous chapter">Pi Words</a></p>
+                        title="previous chapter">Task behind Pi Words</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/developmentlog.txt"
@@ -129,14 +154,14 @@ Chained OR operators:</p>
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="description.html" title="Pi Words"
+          <a href="description.html" title="Task behind Pi Words"
              >previous</a> |</li>
         <li><a href="index.html">PI_Words 0.1 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
         &copy; Copyright 2013, Arthur Jaron.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
   </body>
 </html>

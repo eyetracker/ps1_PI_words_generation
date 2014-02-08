@@ -1,4 +1,5 @@
 
+
 class WordFinder:
 
     '''Given a String (the haystack) and an array of Strings (the needles),
@@ -14,7 +15,21 @@ class WordFinder:
     @return The list of needles that were found in the haystack.
     '''
 
+    @staticmethod
     def getSubstrings(haystack, needles):
         # TODO: Implement (Problem 4.b)
-        #return new HashMap<String, Integer>();
-        return NotImplemented
+        if not type(needles) is list:
+            raise TypeError
+        found_needles = {}
+        for needle in needles:
+            # print(haystack)
+            # print(needle)
+            foundindex = haystack.find(needle)
+            if foundindex > -1:
+                found_needles.update({needle: foundindex})
+        return found_needles
+
+
+
+
+

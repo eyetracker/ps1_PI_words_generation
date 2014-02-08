@@ -1,5 +1,6 @@
 import math
 import logging
+from decimal import Decimal
 
 '''
 Converts an array where the ith digit corresponds to (1 / baseA)^(i + 1)
@@ -62,7 +63,7 @@ def mult(fraction, baseB, output):
     global precision
     # import ipdb; ipdb.set_trace()
     if precision > 0:
-        prod = fraction * float(baseB)
+        prod = Decimal(fraction) * Decimal(baseB)
         # logger.debug("prod: ",prod)
         int_prod = int(math.floor(prod))
         # if int_prod >= 1:
@@ -94,10 +95,10 @@ def toDec(digits, baseA):
     dec_list = []
     # logger.debug(digit_list)
     for i, d in enumerate(digit_list):
-        dec_d = float(d)*baseA**-(i+1)
+        dec_d = Decimal(d)*Decimal(baseA)**-(i+1)
         dec_list.append(dec_d)
     # logger.debug(dec_list)
-    output = 0.0
+    output = Decimal(0)
     for i in dec_list:
         output += i
     logger.debug("toDec output: %s" % output)
@@ -121,6 +122,8 @@ def init(precisionB):
 
 def convertBase(digits, baseA, baseB, precisionB):
     # Problem 2.b
+    logger.debug("\nINPUT\n========\nbaseA: %s baseB: %s precisionB: %s " % (baseA, baseB, precisionB) )
+    logger.debug("DIGITS\n " +str(digits) + "\n")
     if verifyInput(digits, baseA, baseB, precisionB):
         init(precisionB)
         dec = toDec(digits, baseA)

@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 
 import math
+import sys
+import time
 
 global DEBUG
 DEBUG = False
@@ -29,8 +31,16 @@ class PiGenerator:
         if precision <= 0:
             return []
         PiInHex = []
+        progress_stations = [x*100 for x in range(int(precision/100))]
+        time_start = time.clock()
         for i in range(1,precision+1):
             PiInHex.append(PiGenerator.piDigit(i))
+            if i in progress_stations:
+                sys.stdout.write(str(i) +' of '+ str(precision))
+                sys.stdout.write("\r")
+                sys.stdout.flush()
+        time_end = time.clock()
+        print("Time needed for computation: ", time_end - time_start, "s")
         return PiInHex
 
     # decorator for python 2! unbound method removed from python 3!

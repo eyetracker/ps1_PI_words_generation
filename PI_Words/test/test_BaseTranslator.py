@@ -109,3 +109,7 @@ def test_BaseTranslatePI():
     expect = [1,4,1,5 ,9,2 ,6,5,3,5,8,9,2,1] # base 10
     assert cb(feed, 16, 10, 14) == expect
 
+# missing: base 26 translate 
+# missing: translation of at least 43 digits. float numbers were used before,
+# which capped the translation at 43 digits, which was resolved by switching to
+# decimal.Decimal

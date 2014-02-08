@@ -13,29 +13,30 @@ class Main:
 
     # List borrowed from: http://www.langmaker.com/wordlist/basiclex.htm
 
+    WORD_LIST = []
+    BASIC_ALPHABET =[
+            'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
+            'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+
     def __init__(self):
-        self.WORD_LIST = []
+        sys.setrecursionlimit(2 * self.PI_PRECISION)
         self.__location__ = os.path.realpath(
             os.path.join(os.getcwd(), os.path.dirname(__file__)))
         words_file = open(os.path.join(self.__location__, "words.list"), "r")
         for line in words_file:
-            self.WORD_LIST.append(words_file.readline)
+            self.WORD_LIST.append(line.rstrip())
         words_file.close()
 
-    BASIC_ALPHABET =[
-        'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
-        'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
-
-    # @staticmethod
     def main(self, *args):
         logging.basicConfig(level=logging.INFO, filename=os.path.join(self.__location__, "log"))
 
         print("Problem 1: Calculating Pi...")
         piHexDigits = PiGenerator.computePiInHex(self.PI_PRECISION)
         try:
+            print("Number of hex-digits: ", len(piHexDigits))
             print(
                 "Digits of Pi in base-16: %s\n\n" %
-                    self.MaybeTruncateString(str(piHexDigits), 100))
+                    self.MaybeTruncateString(str(piHexDigits), 500))
         except:
             pass
 
@@ -43,9 +44,10 @@ class Main:
         translatedPiBase26 = \
                 BaseTranslator.convertBase(piHexDigits, 16, 26, self.PI_PRECISION)
         try:
+            print("Number of base-26-digits: ", len(translatedPiBase26))
             print(
                 "Digits of Pi in base-26: %s\n\n" %
-                    self.MaybeTruncateString(str(translatedPiBase26), 50))
+                    self.MaybeTruncateString(str(translatedPiBase26), 500))
         except:
             pass
 
@@ -53,37 +55,40 @@ class Main:
         basicConversion = DigitsToStringConverter.convertDigitsToString(
                 translatedPiBase26, 26, self.BASIC_ALPHABET)
         try:
+            print("Number of converted chars: ", len(basicConversion))
             print(
                 "Digits of Pi translated into a-z: %s\n\n",
-                    self.MaybeTruncateString(basicConversion, 50))
+                    self.MaybeTruncateString(basicConversion, 889))
         except:
             pass
 
         print("Problem 4: Getting word matches")
         basicSubstrings = WordFinder.getSubstrings(basicConversion, self.WORD_LIST)
-        print("  ---- commented out -----")
+        print("Amount of matches: ", len(basicSubstrings))
+        # print("  ---- commented out -----")
         # for entry in basicSubstrings.entrySet():
         #     printWithContext(basicConversion, entry.getValue(), entry.getKey(), 3, true)
 
         try:
-            print("Word coverage using basic alphabet: %d\n\n" %
-                    len(basicSubstrings) / len(self.WORD_LIST))
+            print("Word coverage using basic alphabet: %f\n\n" %
+                    (len(basicSubstrings) / len(self.WORD_LIST)))
+            print(basicSubstrings)
         except:
             print(basicSubstrings)
 
         print('''Problem 5: Getting word matches with base-100 and
         		           frequency dictionary''')
-        translatedPiBase100 = \
-                BaseTranslator.convertBase(piHexDigits, 16, 100, self.PI_PRECISION)
-        alphabet = AlphabetGenerator.generateFrequencyAlphabet(
-                100, self.WORD_LIST)
+        # translatedPiBase100 = \
+        #         BaseTranslator.convertBase(piHexDigits, 16, 100, self.PI_PRECISION)
+        # alphabet = AlphabetGenerator.generateFrequencyAlphabet(
+        #         100, self.WORD_LIST)
 
-        print("Frequency dictionary generated: %s\n" %
-                          self.MaybeTruncateString(str(alphabet), 50))
+        # print("Frequency dictionary generated: %s\n" %
+        #                   self.MaybeTruncateString(str(alphabet), 50))
 
-        frequencyConversion = \
-                DigitsToStringConverter.convertDigitsToString(
-                        translatedPiBase100, 100, alphabet)
+        # frequencyConversion = \
+        #         DigitsToStringConverter.convertDigitsToString(
+        #                 translatedPiBase100, 100, alphabet)
         try:
             print(
                 "Digits of Pi translated into a-z: %s\n" %
@@ -91,8 +96,9 @@ class Main:
         except:
             pass
 
-        frequencySubstrings = \
-                WordFinder.getSubstrings(frequencyConversion, self.WORD_LIST)
+        # frequencySubstrings = \
+        #         WordFinder.getSubstrings(frequencyConversion, self.WORD_LIST)
+
         # for (Map.Entry<String, Integer> entry :
         #      frequencySubstrings.entrySet()) {
         #     printWithContext(frequencyConversion, entry.getValue(),

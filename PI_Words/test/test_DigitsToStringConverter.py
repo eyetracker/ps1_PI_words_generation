@@ -29,3 +29,16 @@ def test_bigNumberSerializer():
     expected = 'imworkingfine'
     assert expected == convert(inp, base, alphabet)
 
+def test_OutputLength():
+    inpSmall = [8,12,22,14,17,10,8,13,6,5,8,13,4]
+    alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+            'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+    base = len(alphabet)
+    assert len(inpSmall) == len(convert(inpSmall,base, alphabet))
+    inpLong = [8,12,22,14,17,10,8,13,6,5,8,13,4,8,12,22,14,17,10,8,13,6,5,8,13,
+            4,8,12,22,14,17,10,8,13,6,5,8,13,4,8,12,22,14,17,10,8,13,6,5,8,13,
+            4,8,12,22,14,17,10,8,13,6,5,8,13,4,8,12,22,14,17,10,8,13,6,5,8,13,
+            4,8,12,22,14,17,10,8,13,6,5,8,13,4,8,12,22,14,17,10,8,13,6,5,8,13,
+            4,8,12,22,14,17,10,8,13,6,5,8,13,4,8,12,22,14,17,10,8,13,6,5,8,13,
+            4,8,12,22,14,17,10,8,13,6,5,8,13,4]
+    assert len(inpLong) == len(convert(inpLong,base, alphabet))
