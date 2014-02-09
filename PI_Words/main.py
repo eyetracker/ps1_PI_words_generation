@@ -9,7 +9,7 @@ from PI_Words.PI.AlphabetGenerator import AlphabetGenerator
 from PI_Words.PI.WordFinder import WordFinder
 
 class Main:
-    PI_PRECISION = 1000
+    PI_PRECISION = 2000
 
     # List borrowed from: http://www.langmaker.com/wordlist/basiclex.htm
 
@@ -28,7 +28,8 @@ class Main:
         words_file.close()
 
     def main(self, *args):
-        logging.basicConfig(level=logging.INFO, filename=os.path.join(self.__location__, "log"))
+        # logging.basicConfig(level=logging.INFO, filename=os.path.join(self.__location__, "log"))
+        logging.basicConfig(level=logging.DEBUG, filename=os.path.join(self.__location__, "log"))
 
         print("Problem 1: Calculating Pi...")
         piHexDigits = PiGenerator.computePiInHex(self.PI_PRECISION)
@@ -58,28 +59,25 @@ class Main:
             print("Number of converted chars: ", len(basicConversion))
             print(
                 "Digits of Pi translated into a-z: %s\n\n",
-                    self.MaybeTruncateString(basicConversion, 889))
+                    self.MaybeTruncateString(basicConversion, 500))
         except:
             pass
 
         print("Problem 4: Getting word matches")
         basicSubstrings = WordFinder.getSubstrings(basicConversion, self.WORD_LIST)
         print("Amount of matches: ", len(basicSubstrings))
-        # print("  ---- commented out -----")
-        # for entry in basicSubstrings.entrySet():
-        #     printWithContext(basicConversion, entry.getValue(), entry.getKey(), 3, true)
 
-        try:
-            print("Word coverage using basic alphabet: %f\n\n" %
-                    (len(basicSubstrings) / len(self.WORD_LIST)))
-            print(basicSubstrings)
-        except:
-            print(basicSubstrings)
+        print("Word coverage using basic alphabet: %f\n\n" %
+                (len(basicSubstrings) / len(self.WORD_LIST)))
+        print(basicSubstrings)
+
 
         print('''Problem 5: Getting word matches with base-100 and
         		           frequency dictionary''')
-        # translatedPiBase100 = \
-        #         BaseTranslator.convertBase(piHexDigits, 16, 100, self.PI_PRECISION)
+        translatedPiBase100 = \
+                BaseTranslator.convertBase(piHexDigits, 16, 100, self.PI_PRECISION)
+        print("Number of base-100-digits: ", len(translatedPiBase100))
+        print("base-100-digits: ", translatedPiBase100[:500])
         # alphabet = AlphabetGenerator.generateFrequencyAlphabet(
         #         100, self.WORD_LIST)
 

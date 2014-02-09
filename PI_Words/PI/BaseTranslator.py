@@ -1,6 +1,7 @@
 import math
 import logging
 from decimal import Decimal
+from decimal import getcontext
 
 '''
 Converts an array where the ith digit corresponds to (1 / baseA)^(i + 1)
@@ -40,12 +41,13 @@ http://math.stackexchange.com/questions/94677/convert-fractions-from-one-base-to
 http://answers.yahoo.com/question/index?qid=20120129134806AAbfcW9
 http://cs.stackexchange.com/questions/10318/the-math-behind-converting-from-any-base-to-any-base-without-going-through-base
 
+TESTS: ../test/test_BaseTranslator.py
 '''
 
 logger = logging.getLogger(__name__)
 
 def runMult(fraction, baseB=16):
-    '''
+    ''' ../test/test_BaseTranslator.py
     Runner for mult() to re-initialize the output list everytime it gets
     called. Using it in interactive mode was problematic, because the list
     wasn't empty anymore after the first use.
@@ -61,15 +63,11 @@ def mult(fraction, baseB, output):
     most significant number.
     '''
     global precision
-    # import ipdb; ipdb.set_trace()
     if precision > 0:
         prod = Decimal(fraction) * Decimal(baseB)
-        # logger.debug("prod: ",prod)
         int_prod = int(math.floor(prod))
-        # if int_prod >= 1:
         output.append(int_prod)
         radix_right = prod - int_prod
-        # logger.debug("radix_right: ", radix_right)
         if radix_right == 0.0:
             logger.debug("mult radix == 0 output: %s" % output)
             return output
@@ -119,6 +117,7 @@ def verifyInput(digits, baseA, baseB, precisionB):
 def init(precisionB):
     global precision
     precision = precisionB
+    getcontext().prec = precisionB
 
 def convertBase(digits, baseA, baseB, precisionB):
     # Problem 2.b
