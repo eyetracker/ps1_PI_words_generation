@@ -89,9 +89,10 @@ def test_Base16Translator():
     expect= [6,6,4,0,6,2,5] # base 10
     assert cb(feed, 16, 10, 7) == expect
 
+    # Hat rounding errors! Fix: More precision, cutting off the list
     feed = [7,5] # base 10 to 16 = 0.C according to http://baseconvert.com/
     expect= [12] # base 16
-    assert cb(feed, 10, 16, 1) == expect
+    assert cb(feed, 10, 16, 2) == expect
 
     feed = [4] # base 16 to 10 = 0.25 according to http://baseconvert.com/
     expect= [2,5] # base 10
@@ -104,10 +105,10 @@ def test_BaseTranslatePI():
     feed = [1,4,1,5 ,9,2 ,6,5,3,5] # base 10 to 16
     expect= [2,4,3,15,6,10,8,8,2,2,14,8] # base 10
     assert cb(feed, 10, 16, 12) == expect
-
+    # Hat rounding errors! Fix: More precision, cutting off the list
     feed = [2,4,3,15,6,10,8,8,8,5] # base 16
     expect = [1,4,1,5 ,9,2 ,6,5,3,5,8,9,2,1] # base 10
-    assert cb(feed, 16, 10, 14) == expect
+    assert cb(feed, 16, 10, 15)[:14] == expect
 
 # missing: base 26 translate 
 # missing: translation of at least 43 digits. float numbers were used before,

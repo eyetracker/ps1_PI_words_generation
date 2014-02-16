@@ -192,6 +192,7 @@ $RECYCLE.BIN/
 # Packages
 *.egg
 *.egg-info
+*.egg-info/
 dist/
 build/
 eggs/
@@ -214,3 +215,14 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+
+#############
+## Project specific
+#############
+
+docs/_build
+docs/_static
+docs/_templates
+
+java_sources/
+
