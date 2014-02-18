@@ -3,7 +3,7 @@ PI Words
 
 [![Build Status](https://travis-ci.org/eyetracker/ps1_PI_words_generation.png?branch=master)](https://travis-ci.org/eyetracker/ps1_PI_words_generation)
 
-My first project for learning test driven development using *new* tools to me:
+My first project for learning test driven development using tools *new* to me:
 
  - py.test
  - TravisCI
