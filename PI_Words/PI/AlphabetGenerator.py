@@ -82,18 +82,6 @@ class AlphabetGenerator():
         def my_round(x):
             return int(x + math.copysign(0.5, x))
 
-        # PDF * Base to determine intervals of each char in output alphabet ###
-        pdf_indexes = OrderedDict([(char, math.floor(x*base))
-            for char, x in pdf.items()])
-        # logger.debug("pdf_indexes:" + str(pdf_indexes))
-
-        # Generate PDF Alphabet ###############################################
-        # alphabet = [key for key, value in pdf_indexes.items() for i in range(value)]
-        # logger.debug(alphabet)
-        # logger.debug(len(alphabet))
-        # return alphabet
-
-        # PROOF OF CONCEPT : CDF ##############################################
         # Compute cumulative density function #################################
         cdf = OrderedDict()
         counter = 0.0
