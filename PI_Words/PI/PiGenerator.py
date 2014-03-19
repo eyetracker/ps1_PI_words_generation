@@ -40,7 +40,9 @@ class PiGenerator:
                 sys.stdout.write("\r")
                 sys.stdout.flush()
         time_end = time.clock()
-        print("Time needed for computation: ", time_end - time_start, "s")
+        duration_secs = time_end - time_start
+        duration = str(math.floor(duration_secs/60)) + ":" + str(duration_secs % 60)[:4]
+        print("Time needed for computation: ", duration, "m:s.ms")
         return PiInHex
 
     # decorator for python 2! unbound method removed from python 3!

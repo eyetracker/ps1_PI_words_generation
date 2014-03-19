@@ -9,7 +9,7 @@ from PI_Words.PI.WordFinder import WordFinder
 from PI_Words.PI.AlphabetGenerator import AlphabetGenerator
 
 class Main:
-    PI_PRECISION = 9000
+    PI_PRECISION = 2000
 
     # List borrowed from: http://www.langmaker.com/wordlist/basiclex.htm
 
